@@ -3,28 +3,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public float playerSpeed = 20f;
 
-    public float playerSpeed = 10f;
-
-    // Corpo rídigo para lógica de colisão
-    private Rigidbody rb;
-
-    // Controlador padrão para movimentos básicos
-    // ATENÇÃO : Não funciona bem com rigidbody sem isKinematic : true
+    // ATENÇÃO : Não funciona bem com rigidbody com isKinematic = false;
     private CharacterController charController;
 
     private float playerX = 0f;
     private float playerY = 0f;
     private float playerZ = 0f;
     private const float GRAVITY = -9.81f;
-
     
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         charController = GetComponent<CharacterController>();
     }
-
 
     void OnMove(InputValue movement)
     {       
@@ -36,7 +28,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(playerX, GRAVITY, playerZ);
+        // Precisa levar em conta up, right e forward para se mover com base na rotação da câmera
+        Vector3 movement = playerX * transform.right + GRAVITY * transform.up + playerZ * transform.forward;
         charController.Move(movement * Time.deltaTime * playerSpeed);
     }   
 }   
