@@ -1,8 +1,13 @@
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {   
+    public AnimatorController playerAttack;
+    public AnimatorController playerWalk;
+
     // Campos marcados com SerializeField podem ser observados pelo Inspector
     [SerializeField] private float playerLife = 3f;
     [SerializeField] private float playerMaxLife = 3f;
@@ -18,18 +23,22 @@ public class PlayerController : MonoBehaviour
 
     // Campos sem SerializeField são estado interno do Player;
     private CharacterController charController;
+    private Animator playerHandAnimator;
     private float playerX = 0f;
     private float playerY = 0f;
     private float playerZ = 0f;
     private const float GRAVITY = -9.81f;
     private bool isCrouching = false;
     private bool isRunning = false;
+    private bool isAttacking = true;
 
     void Start()
     {
         charController = GetComponent<CharacterController>();
         playerSpeed = playerNormalSpeed;
         charController.height = playerHeight;
+        
+        playerHandAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
     }
 
     void Update()
@@ -39,6 +48,9 @@ public class PlayerController : MonoBehaviour
         // Precisa levar em conta up, right e forward (eixos no espaço) para se mover com base na rotação da câmera
         Vector3 movementVector = (playerX * transform.right.normalized) + (playerY * transform.up.normalized) + (playerZ * transform.forward.normalized);
         MovePlayer(movementVector);
+        
+        RefreshAttackState();
+        RefreshAnimationState();
     }
 
     void OnMove(InputValue movement)
@@ -79,6 +91,31 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnAttack() {
+        isAttacking = true;
+        playerHandAnimator.runtimeAnimatorController = playerAttack;
+    }
+
+    void RefreshAttackState()
+    {
+        if(!isAttacking)
+        {
+            playerHandAnimator.runtimeAnimatorController = playerWalk;
+            return;
+        }
+
+        if(playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+            isAttacking = false;
+
+        }else if(playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2)
+        {
+            ComputateAttack();
+        }
+    }
+
+
+    void ComputateAttack()
+    {
         Collider[] collidersNearby = Physics.OverlapSphere(transform.position, playerAttackRange);
         
         float bestAngle = 41f;
@@ -124,6 +161,17 @@ public class PlayerController : MonoBehaviour
         }
 
         return isRunning == true ? playerRunningSpeed : playerNormalSpeed;
+    }
+
+    void RefreshAnimationState()
+    {
+        if(!isAttacking && charController.velocity.magnitude == 0)
+        {
+            playerHandAnimator.speed = 0;
+        }else
+        {
+            playerHandAnimator.speed = 1;
+        }
     }
 
     public void TakeDamage()

@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float sensitivity = 0.25f;
     private float rotationCamera;
     private float rotationPlayer;
+    
+    private GameObject playerHands;
 
     void Start()
     {
@@ -16,12 +18,20 @@ public class CameraController : MonoBehaviour
 
         // Inicializa rotationPlayer com valores de rotação do player
         rotationPlayer = transform.parent.transform.eulerAngles.y;
+
+        playerHands = GameObject.FindGameObjectWithTag("CameraAttach");
     }
 
     void Update()
     {
         RefreshRotationValues(Mouse.current.delta.ReadValue());     
         RotateCameraAndPlayer();
+    }
+    
+    // Evita stuttering na movimentação da mão.
+    void LateUpdate()
+    {
+        playerHands.transform.rotation = Quaternion.Euler(rotationCamera, rotationPlayer, 0f);
     }
 
     void RefreshRotationValues(Vector2 mousePosition)
