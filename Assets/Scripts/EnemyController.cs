@@ -9,6 +9,7 @@ Este script é inserido no inimigo(enemy) e
 public class EnemyController : MonoBehaviour
 {
 
+    [SerializeField] private float enemyLife = 1f;
     [SerializeField] private float detectionRadius = 10f;
     private Transform player;
     private NavMeshAgent agent;
@@ -43,5 +44,15 @@ public class EnemyController : MonoBehaviour
     void RotateEnemy()
     {
         transform.rotation = playerCamera.transform.rotation;        
+    }
+
+    public void TakeDamage()
+    {
+        enemyLife -= 1;
+    }
+
+    public float GetEnemyLife()
+    {
+        return enemyLife;
     }
 }
