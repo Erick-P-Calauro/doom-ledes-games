@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchSpeed = 1f;
     [SerializeField] private float crouchRunningSpeed = 3f;
     [SerializeField] private float playerSpeed;
+    [SerializeField] private float playerAttackRange = 2f;
 
     // Campos sem SerializeField são estado interno do Player;
     private CharacterController charController;
@@ -73,6 +74,38 @@ public class PlayerController : MonoBehaviour
     void OnSprint()
     {
         isRunning = !isRunning;
+    }
+
+    void OnAttack() {
+        Collider[] collidersNearby = Physics.OverlapSphere(transform.position, playerAttackRange);
+        
+        float bestAngle = 41f;
+        Collider bestTarget = null;
+
+        foreach(Collider c in collidersNearby)
+        {
+            if(!c.CompareTag("Enemy"))
+            {
+                continue;
+            }
+
+            // Usa o centro do collider e não do gameobject do enemy.
+            Vector3 directionToColider = (c.transform.position - transform.position).normalized;
+            float angleBetweenObjects = Vector3.Angle(transform.forward, directionToColider);
+            
+            // Lógica para pegar o alvo mais adequado à mira do jogador 
+            if(angleBetweenObjects <= 40f && bestAngle > angleBetweenObjects)
+            {
+                bestTarget = c;
+                bestAngle = angleBetweenObjects;
+            }
+        }
+
+        if(bestTarget != null)
+        {
+            Debug.Log("Inimigo Destruído");
+            Destroy(bestTarget.gameObject);
+        }
     }
 
     float GetPlayerSpeed()
