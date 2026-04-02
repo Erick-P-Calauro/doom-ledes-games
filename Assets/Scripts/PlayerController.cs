@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {   
     // Campos marcados com SerializeField podem ser observados pelo Inspector
+    [SerializeField] private float playerLife = 3f;
+    [SerializeField] private float playerMaxLife = 3f;
     [SerializeField] private float playerNormalSpeed = 5f;
     [SerializeField] private float playerRunningSpeed = 10f;
     [SerializeField] private float playerHeight = 2f;
@@ -103,8 +105,14 @@ public class PlayerController : MonoBehaviour
 
         if(bestTarget != null)
         {
-            Debug.Log("Inimigo Destruído");
-            Destroy(bestTarget.gameObject);
+            GameObject enemy = bestTarget.gameObject;
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+
+            enemyController.TakeDamage();
+            if(enemyController.GetEnemyLife() == 0)
+            {
+                Destroy(enemy);
+            }
         }
     }
 
@@ -116,5 +124,20 @@ public class PlayerController : MonoBehaviour
         }
 
         return isRunning == true ? playerRunningSpeed : playerNormalSpeed;
+    }
+
+    public void TakeDamage()
+    {
+        playerLife -= 1;
+    }
+
+    public float GetPlayerLife()
+    {
+        return playerLife;
+    }
+
+    public float GetPlayerMaxLife()
+    {
+        return playerMaxLife;    
     }
 }   
