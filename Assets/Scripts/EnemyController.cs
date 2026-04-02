@@ -6,7 +6,7 @@ Caso o usuário não tenha o pacakge (ou queira conferir), siga as seguintes ins
 dentro do editor, Window-> Package Management-> package manager-> Unity Registry. Search: "AI Navigation"
 Este script é inserido no inimigo(enemy) e 
 */
-public class EnemyFollow : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     private Transform player;
     private NavMeshAgent agent;
