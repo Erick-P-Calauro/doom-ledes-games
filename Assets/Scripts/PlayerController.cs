@@ -4,13 +4,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {   
     // Campos marcados com SerializeField podem ser observados pelo Inspector
-    [SerializeField] private float playerNormalSpeed = 30f;
-    [SerializeField] private float playerRunningSpeed = 50f;
+    [SerializeField] private float playerNormalSpeed = 5f;
+    [SerializeField] private float playerRunningSpeed = 10f;
     [SerializeField] private float playerHeight = 2f;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float crouchHeight = 1f;
-    [SerializeField] private float crouchSpeed = 10f;
-    [SerializeField] private float crouchRunningSpeed = 15f;
+    [SerializeField] private float crouchSpeed = 1f;
+    [SerializeField] private float crouchRunningSpeed = 3f;
     [SerializeField] private float playerSpeed;
 
     // Campos sem SerializeField são estado interno do Player;
@@ -66,23 +66,22 @@ public class PlayerController : MonoBehaviour
 
     void OnCrouch()
     {
-        charController.height = isCrouching ? crouchHeight : playerHeight;
         isCrouching = !isCrouching;
+        charController.height = isCrouching == true ? crouchHeight : playerHeight;
     }
 
     void OnSprint()
     {
         isRunning = !isRunning;
-        playerSpeed = GetPlayerSpeed();
     }
 
     float GetPlayerSpeed()
     {
         if(isCrouching)
         {
-            return isRunning ? crouchRunningSpeed : crouchSpeed;
+            return isRunning == true ? crouchRunningSpeed : crouchSpeed;
         }
 
-        return isRunning ? playerRunningSpeed : playerNormalSpeed;
+        return isRunning == true ? playerRunningSpeed : playerNormalSpeed;
     }
 }   

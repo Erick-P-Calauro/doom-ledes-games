@@ -8,20 +8,28 @@ Este script é inserido no inimigo(enemy) e
 */
 public class EnemyController : MonoBehaviour
 {
+
+    [SerializeField] private float detectionRadius = 10f;
     private Transform player;
     private NavMeshAgent agent;
-    public float detectionRadius = 10f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Camera playerCamera;
+   
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player").transform;
+        playerCamera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(transform.position,player.position);
+        MoveEnemy();
+        RotateEnemy();
+    }
+
+    void MoveEnemy()
+    {
+        float distance = Vector3.Distance(transform.position, player.position);
         if(distance <= detectionRadius)
         {
             agent.SetDestination(player.position);   
@@ -29,6 +37,11 @@ public class EnemyController : MonoBehaviour
         else
         {
             agent.ResetPath();
-        }        
+        }
+    }
+
+    void RotateEnemy()
+    {
+        transform.rotation = playerCamera.transform.rotation;        
     }
 }
