@@ -294,7 +294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!65 &41996751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -496,7 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!64 &497715931
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -752,6 +750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14275e63a4542b24997ef5cab59dc462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  enemyLife: 1
   detectionRadius: 10
 --- !u!64 &681657723
 MeshCollider:
@@ -966,7 +965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!65 &777218366
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1197,6 +1195,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abb5fa71bbbce648a9082b1b2c5e092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  playerAttack: {fileID: -6887053756835650798, guid: 9846317a45460f841864c530deaa6be5, type: 3}
+  playerWalk: {fileID: 7761486746423427899, guid: 38f7099e9a2d0d1429c492ba91a825eb, type: 3}
+  playerLife: 3
+  playerMaxLife: 3
   playerNormalSpeed: 15
   playerRunningSpeed: 25
   playerHeight: 2
@@ -1204,7 +1206,8 @@ MonoBehaviour:
   crouchHeight: 1
   crouchSpeed: 10
   crouchRunningSpeed: 15
-  playerSpeed: 0
+  playerSpeed: 1
+  playerAttackRange: 2
 --- !u!143 &933887850
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1293,6 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14275e63a4542b24997ef5cab59dc462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  enemyLife: 1
   detectionRadius: 20
 --- !u!195 &984823692
 NavMeshAgent:
@@ -1442,7 +1446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!64 &1176602476
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1569,7 +1572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!64 &1184199467
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1712,7 +1714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!65 &1270183460
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1961,7 +1962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!1 &1312230050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,7 +2010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!65 &1312230053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2243,7 +2242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!64 &1581465227
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2370,7 +2368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!64 &1767265869
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2513,7 +2510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86187846454ff14fa0842938f1e114a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  cam: {fileID: 0}
 --- !u!65 &1868686993
 BoxCollider:
   m_ObjectHideFlags: 0
