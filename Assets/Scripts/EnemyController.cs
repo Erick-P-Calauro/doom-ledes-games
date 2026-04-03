@@ -46,9 +46,16 @@ public class EnemyController : MonoBehaviour
         transform.rotation = playerCamera.transform.rotation;        
     }
 
-    public void TakeDamage()
+    public bool TakeDamage()
     {
         enemyLife -= 1;
+        if(enemyLife == 0)
+        {
+            Destroy(gameObject);
+            return true;
+        }
+        
+        return false;
     }
 
     public float GetEnemyLife()
