@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching = false;
     private bool isRunning = false;
     private bool isAttacking = false;
+    private bool attackComputated = false;
 
     void Start()
     {
@@ -107,10 +108,12 @@ public class PlayerController : MonoBehaviour
         if(playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
             isAttacking = false;
+            attackComputated = false;
 
-        }else if(playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2)
+        }else if(!attackComputated && playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2)
         {
             ComputateAttack();
+            attackComputated = true;
         }
     }
 
@@ -147,10 +150,6 @@ public class PlayerController : MonoBehaviour
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
 
             enemyController.TakeDamage();
-            if(enemyController.GetEnemyLife() == 0)
-            {
-                Destroy(enemy);
-            }
         }
     }
 
