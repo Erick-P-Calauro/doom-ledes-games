@@ -54,16 +54,14 @@
 
 }
 
-.unity-progress-bar{
-    height: 100px;
+.unity-progress-bar__progress {
+    background-color: red;
 }
 
 .unity-progress-bar__background {
-    background-color: red;
+    background-color: white;
 }
 
 #col-sujeira ProgressBar {
     width: 160px;
-
-    color: red;
 }
