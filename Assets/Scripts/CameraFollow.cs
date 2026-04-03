@@ -13,6 +13,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0);
+        Debug.Log("billboard rodando");
+        transform.rotation = cam.transform.rotation;
     }
 }
