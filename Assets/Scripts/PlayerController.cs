@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private const float GRAVITY = -9.81f;
     private bool isCrouching = false;
     private bool isRunning = false;
-    private bool isAttacking = true;
+    private bool isAttacking = false;
 
     void Start()
     {
@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         charController.height = playerHeight;
         
         playerHandAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
+        playerHandAnimator.speed = 0;
     }
 
     void Update()
