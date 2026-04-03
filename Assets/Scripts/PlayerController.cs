@@ -1,32 +1,44 @@
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {   
+    public AnimatorController playerAttack;
+    public AnimatorController playerWalk;
+
     // Campos marcados com SerializeField podem ser observados pelo Inspector
-    [SerializeField] private float playerNormalSpeed = 30f;
-    [SerializeField] private float playerRunningSpeed = 50f;
+    [SerializeField] private float playerLife = 3f;
+    [SerializeField] private float playerMaxLife = 3f;
+    [SerializeField] private float playerNormalSpeed = 5f;
+    [SerializeField] private float playerRunningSpeed = 10f;
     [SerializeField] private float playerHeight = 2f;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float crouchHeight = 1f;
-    [SerializeField] private float crouchSpeed = 10f;
-    [SerializeField] private float crouchRunningSpeed = 15f;
+    [SerializeField] private float crouchSpeed = 1f;
+    [SerializeField] private float crouchRunningSpeed = 3f;
     [SerializeField] private float playerSpeed;
+    [SerializeField] private float playerAttackRange = 2f;
 
     // Campos sem SerializeField são estado interno do Player;
     private CharacterController charController;
+    private Animator playerHandAnimator;
     private float playerX = 0f;
     private float playerY = 0f;
     private float playerZ = 0f;
     private const float GRAVITY = -9.81f;
     private bool isCrouching = false;
     private bool isRunning = false;
+    private bool isAttacking = true;
 
     void Start()
     {
         charController = GetComponent<CharacterController>();
         playerSpeed = playerNormalSpeed;
         charController.height = playerHeight;
+        
+        playerHandAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
     }
 
     void Update()
@@ -36,6 +48,9 @@ public class PlayerController : MonoBehaviour
         // Precisa levar em conta up, right e forward (eixos no espaço) para se mover com base na rotação da câmera
         Vector3 movementVector = (playerX * transform.right.normalized) + (playerY * transform.up.normalized) + (playerZ * transform.forward.normalized);
         MovePlayer(movementVector);
+        
+        RefreshAttackState();
+        RefreshAnimationState();
     }
 
     void OnMove(InputValue movement)
@@ -66,23 +81,111 @@ public class PlayerController : MonoBehaviour
 
     void OnCrouch()
     {
-        charController.height = isCrouching ? crouchHeight : playerHeight;
         isCrouching = !isCrouching;
+        charController.height = isCrouching == true ? crouchHeight : playerHeight;
     }
 
     void OnSprint()
     {
         isRunning = !isRunning;
-        playerSpeed = GetPlayerSpeed();
+    }
+
+    void OnAttack() {
+        isAttacking = true;
+        playerHandAnimator.runtimeAnimatorController = playerAttack;
+    }
+
+    void RefreshAttackState()
+    {
+        if(!isAttacking)
+        {
+            playerHandAnimator.runtimeAnimatorController = playerWalk;
+            return;
+        }
+
+        if(playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+            isAttacking = false;
+
+        }else if(playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2)
+        {
+            ComputateAttack();
+        }
+    }
+
+
+    void ComputateAttack()
+    {
+        Collider[] collidersNearby = Physics.OverlapSphere(transform.position, playerAttackRange);
+        
+        float bestAngle = 41f;
+        Collider bestTarget = null;
+
+        foreach(Collider c in collidersNearby)
+        {
+            if(!c.CompareTag("Enemy"))
+            {
+                continue;
+            }
+
+            // Usa o centro do collider e não do gameobject do enemy.
+            Vector3 directionToColider = (c.transform.position - transform.position).normalized;
+            float angleBetweenObjects = Vector3.Angle(transform.forward, directionToColider);
+            
+            // Lógica para pegar o alvo mais adequado à mira do jogador 
+            if(angleBetweenObjects <= 40f && bestAngle > angleBetweenObjects)
+            {
+                bestTarget = c;
+                bestAngle = angleBetweenObjects;
+            }
+        }
+
+        if(bestTarget != null)
+        {
+            GameObject enemy = bestTarget.gameObject;
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+
+            enemyController.TakeDamage();
+            if(enemyController.GetEnemyLife() == 0)
+            {
+                Destroy(enemy);
+            }
+        }
     }
 
     float GetPlayerSpeed()
     {
         if(isCrouching)
         {
-            return isRunning ? crouchRunningSpeed : crouchSpeed;
+            return isRunning == true ? crouchRunningSpeed : crouchSpeed;
         }
 
-        return isRunning ? playerRunningSpeed : playerNormalSpeed;
+        return isRunning == true ? playerRunningSpeed : playerNormalSpeed;
+    }
+
+    void RefreshAnimationState()
+    {
+        if(!isAttacking && charController.velocity.magnitude == 0)
+        {
+            playerHandAnimator.speed = 0;
+        }else
+        {
+            playerHandAnimator.speed = 1;
+        }
+    }
+
+    public void TakeDamage()
+    {
+        playerLife -= 1;
+    }
+
+    public float GetPlayerLife()
+    {
+        return playerLife;
+    }
+
+    public float GetPlayerMaxLife()
+    {
+        return playerMaxLife;    
     }
 }   
