@@ -86,7 +86,6 @@ public class EnemyController : MonoBehaviour
 
     void TryAttackPlayer()
     {
-        Debug.Log("Tentando atacar");
         float distance = UnityEngine.Vector3.Distance(transform.position,player.position);
 
         if (distance <= attackRange)
@@ -96,7 +95,6 @@ public class EnemyController : MonoBehaviour
                 PlayerController playerController = player.GetComponent<PlayerController>();
                 if(playerController != null)
                 {
-                    Debug.Log("ATACOU!");
                     playerController.TakeDamage();
                     lastAttackTime = Time.time;
                 }
