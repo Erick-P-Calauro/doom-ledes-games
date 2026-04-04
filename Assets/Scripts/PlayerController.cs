@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private float playerX = 0f;
     private float playerY = 0f;
     private float playerZ = 0f;
-    private const float GRAVITY = -9.81f;
+    private const float GRAVITY = -6f;
     private bool isCrouching = false;
     private bool isRunning = false;
     private bool isAttacking = false;

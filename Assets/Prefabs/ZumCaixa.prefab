@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5453235157363753833}
   - component: {fileID: 2238082643398184923}
   - component: {fileID: 5511487329168667563}
-  - component: {fileID: 2861269873413792292}
+  - component: {fileID: 6490428562300355930}
   m_Layer: 0
   m_Name: ZumCaixa
   m_TagString: Enemy
@@ -72,7 +72,7 @@ MonoBehaviour:
   enemyPontuation: 1
   enemyLife: 1
   detectionRadius: 10
---- !u!65 &2861269873413792292
+--- !u!65 &6490428562300355930
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,12 +87,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0664864, y: 1.9520305, z: 1}
+  m_Center: {x: -0.03324318, y: 0.8474954, z: 0}
 --- !u!1 &3666528455987062820
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +102,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5244846462830425544}
-  - component: {fileID: 7870268720011228024}
   - component: {fileID: 5542131744464220629}
   m_Layer: 0
   m_Name: Body
@@ -126,27 +125,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5453235157363753833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7870268720011228024
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3666528455987062820}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.0310011}
-  m_Center: {x: 0, y: 0, z: -0.015500516}
 --- !u!212 &5542131744464220629
 SpriteRenderer:
   serializedVersion: 2
@@ -196,7 +174,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1542649198536296870, guid: b0fe91d68a95b4b42abbe8662628af08, type: 3}
+  m_Sprite: {fileID: -109997280738488821, guid: b0fe91d68a95b4b42abbe8662628af08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -205,4 +183,4 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1

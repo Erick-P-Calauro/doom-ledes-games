@@ -84,7 +84,7 @@ MonoBehaviour:
   playerNormalSpeed: 5
   playerRunningSpeed: 10
   playerHeight: 2
-  jumpHeight: 2.5
+  jumpHeight: 2
   crouchHeight: 1
   crouchSpeed: 1
   crouchRunningSpeed: 3
