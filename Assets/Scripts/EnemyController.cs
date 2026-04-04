@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -50,7 +49,7 @@ public class EnemyController : MonoBehaviour
 
     void MoveEnemy()
     {
-        float distance =  UnityEngine.Vector3.Distance(transform.position, player.position);
+        float distance =  Vector3.Distance(transform.position, player.position);
         if(distance <= detectionRadius)
         {
             agent.SetDestination(player.position);   
@@ -95,7 +94,7 @@ public class EnemyController : MonoBehaviour
                 PlayerController playerController = player.GetComponent<PlayerController>();
                 if(playerController != null)
                 {
-                    playerController.TakeDamage();
+                    playerController.TakeDamage(transform.position);
                     lastAttackTime = Time.time;
                 }
             }

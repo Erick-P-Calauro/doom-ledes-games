@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {   
+
+    private UnityEngine.Vector3 knockbackVelocity;
+    [SerializeField] private float knockbackForce = 25f;
     // Campos marcados com SerializeField podem ser observados pelo Inspector
     [SerializeField] private float playerLife = 3f;
     [SerializeField] private float playerMaxLife = 3f;
@@ -63,14 +66,18 @@ public class PlayerController : MonoBehaviour
         playerZ = inputVector.y;
     }
 
-    void MovePlayer(Vector3 movementVector)
+    void MovePlayer(UnityEngine.Vector3 movementVector)
     {
         if(!charController.isGrounded)
         {
             playerY += GRAVITY * Time.deltaTime;
         }
+        UnityEngine.Vector3 finalMove = movementVector * playerSpeed;
+        finalMove += knockbackVelocity;
 
-        charController.Move(playerSpeed * Time.deltaTime * movementVector);
+        charController.Move(finalMove * Time.deltaTime);
+
+        knockbackVelocity = UnityEngine.Vector3.Lerp(knockbackVelocity,Vector3.zero, 5f * Time.deltaTime);
     }
 
     void OnJump()
@@ -179,9 +186,11 @@ public class PlayerController : MonoBehaviour
         return isRunning == true ? playerRunningSpeed : playerNormalSpeed;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(UnityEngine.Vector3 attackerPosition)
     {
         playerLife -= 1;
+        Vector3 direction = (transform.position - attackerPosition).normalized;
+        knockbackVelocity = direction * knockbackForce;
     }
 
     public float GetPlayerLife()
