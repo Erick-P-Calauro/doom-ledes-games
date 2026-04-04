@@ -38,14 +38,9 @@ public class PlayerController : MonoBehaviour
         playerSpeed = playerNormalSpeed;
         charController.height = playerHeight;
         
-<<<<<<< HEAD
-        playerHandAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
-        playerHandAnimator.speed = 0;
-=======
         playerAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
         
         RefreshAnimatorState();
->>>>>>> origin/master
     }
 
     void Update()
@@ -107,10 +102,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetTrigger("Attack");
         isAttacking = true;
         isDamaging = true;
-<<<<<<< HEAD
-        playerHandAnimator.runtimeAnimatorController = playerAttack;
-=======
->>>>>>> origin/master
     }
 
     void RefreshAttackState()
@@ -125,16 +116,10 @@ public class PlayerController : MonoBehaviour
         if(state.IsName("Attack") && state.normalizedTime > 1f)
         {
             isAttacking = false;
-<<<<<<< HEAD
-        }
-        
-        if(isDamaging && playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.22)
-=======
             playerAnimator.ResetTrigger("Attack");
         }
         
         if(isDamaging && state.IsName("Attack") && state.normalizedTime >= 0.28)
->>>>>>> origin/master
         {
             ComputateAttack();
             isDamaging= false;
@@ -194,26 +179,6 @@ public class PlayerController : MonoBehaviour
         return isRunning == true ? playerRunningSpeed : playerNormalSpeed;
     }
 
-<<<<<<< HEAD
-    void RefreshAnimationState()
-    {
-        if(isAttacking)
-        {
-            playerHandAnimator.speed = 1;
-            return;
-        }
-
-        if(charController.velocity.magnitude == 0)
-        {
-            playerHandAnimator.speed = 0;
-        }else
-        {
-            playerHandAnimator.speed = playerSpeed/playerNormalSpeed;
-        }
-    }
-
-=======
->>>>>>> origin/master
     public void TakeDamage()
     {
         playerLife -= 1;
