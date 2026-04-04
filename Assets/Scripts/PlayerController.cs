@@ -4,9 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {   
-    public AnimatorController playerAttack;
-    public AnimatorController playerWalk;
-
     // Campos marcados com SerializeField podem ser observados pelo Inspector
     [SerializeField] private float playerLife = 3f;
     [SerializeField] private float playerMaxLife = 3f;
@@ -23,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     // Campos sem SerializeField são estado interno do Player;
     private CharacterController charController;
-    private Animator playerHandAnimator;
+    private Animator playerAnimator;
     private float playerX = 0f;
     private float playerY = 0f;
     private float playerZ = 0f;
@@ -41,8 +38,9 @@ public class PlayerController : MonoBehaviour
         playerSpeed = playerNormalSpeed;
         charController.height = playerHeight;
         
-        playerHandAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
-        playerHandAnimator.speed = 0;
+        playerAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
+        
+        RefreshAnimatorState();
     }
 
     void Update()
@@ -54,7 +52,7 @@ public class PlayerController : MonoBehaviour
         MovePlayer(movementVector);
         
         RefreshAttackState();
-        RefreshAnimationState();
+        RefreshAnimatorState();
     }
 
     void OnMove(InputValue movement)
@@ -95,25 +93,33 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnAttack() {
+        if(isAttacking)
+        {
+            return;
+        }
+
+        playerAnimator.ResetTrigger("Attack");
+        playerAnimator.SetTrigger("Attack");
         isAttacking = true;
         isDamaging = true;
-        playerHandAnimator.runtimeAnimatorController = playerAttack;
     }
 
     void RefreshAttackState()
     {
         if(!isAttacking)
         {
-            playerHandAnimator.runtimeAnimatorController = playerWalk;
             return;
         }
 
-        if(playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+        if(state.IsName("Attack") && state.normalizedTime > 1f)
         {
             isAttacking = false;
+            playerAnimator.ResetTrigger("Attack");
         }
         
-        if(isDamaging && playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.22)
+        if(isDamaging && state.IsName("Attack") && state.normalizedTime >= 0.28)
         {
             ComputateAttack();
             isDamaging= false;
@@ -156,6 +162,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void RefreshAnimatorState()
+    {
+        playerAnimator.SetBool("IsWalking",  charController.velocity.magnitude > 0);
+        playerAnimator.SetBool("IsRunning", isRunning);
+        playerAnimator.SetBool("IsCrouching", isCrouching);
+    }
+
     float GetPlayerSpeed()
     {
         if(isCrouching)
@@ -164,23 +177,6 @@ public class PlayerController : MonoBehaviour
         }
 
         return isRunning == true ? playerRunningSpeed : playerNormalSpeed;
-    }
-
-    void RefreshAnimationState()
-    {
-        if(isAttacking)
-        {
-            playerHandAnimator.speed = 1;
-            return;
-        }
-
-        if(charController.velocity.magnitude == 0)
-        {
-            playerHandAnimator.speed = 0;
-        }else
-        {
-            playerHandAnimator.speed = playerSpeed/playerNormalSpeed;
-        }
     }
 
     public void TakeDamage()
