@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - CameraAttach
+  - ScoreManager
   layers:
   - Default
   - TransparentFX

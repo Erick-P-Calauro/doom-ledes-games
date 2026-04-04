@@ -3,27 +3,38 @@ using UnityEngine.UIElements;
 
 public class PlayerHudController : MonoBehaviour
 {
-
-    public Texture2D fullHeartImage;
-    public Texture2D emptyHeartImage;
+    [SerializeField] private ScoreManager score;
+    [SerializeField] private Texture2D fullHeartImage;
+    [SerializeField] private Texture2D emptyHeartImage;
     private PlayerController playerInfo;
     private UIDocument document;
     private VisualElement root;
+    private VisualElement mainRow;
+    private ProgressBar progressBar;
     
     void Start()
     {
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement;
+
+        mainRow = root.Query(name: "heart-row");
+        progressBar = root.Query<ProgressBar>(name: "progress-sujeira");
         playerInfo = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-        repaint();
+        repaintLife();
+        repaintPoints();
     }
 
-    public void repaint()
+    void Update()
     {
+        if(score.shouldChangeHud)
+        {
+            repaintPoints();
+        }
+    }
 
-        VisualElement mainRow = root.Query(name: "heart-row");
-
+    public void repaintLife()
+    {
         for(int i = 0; i < playerInfo.GetPlayerLife(); i++)
         {
             Image r = new Image();
@@ -33,6 +44,14 @@ public class PlayerHudController : MonoBehaviour
             
             mainRow.Add(r);
         }
+    }
+
+    public void repaintPoints()
+    {
+        int pointsPercentage = score.getPontuationPercentage();
+        progressBar.value = pointsPercentage;
+
+        score.comunicateHudChanged();
     }
 
 

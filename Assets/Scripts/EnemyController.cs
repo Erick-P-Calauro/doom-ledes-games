@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,8 +10,10 @@ Este script é inserido no inimigo(enemy) e
 public class EnemyController : MonoBehaviour
 {
 
+    public float enemyPontuation = 1f;
     [SerializeField] private float enemyLife = 1f;
     [SerializeField] private float detectionRadius = 10f;
+    private ScoreManager score;
     private Transform player;
     private NavMeshAgent agent;
     private Camera playerCamera;
@@ -18,6 +21,15 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        
+        try
+        {
+            score = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        }catch(Exception e)
+        {
+            Debug.Log("Enemy Exception : " + e.ToString());
+        }
+
         player = GameObject.FindWithTag("Player").transform;
         playerCamera = Camera.main;
     }
@@ -46,16 +58,17 @@ public class EnemyController : MonoBehaviour
         transform.rotation = playerCamera.transform.rotation;        
     }
 
-    public bool TakeDamage()
+    public void TakeDamage()
     {
         enemyLife -= 1;
+        
         if(enemyLife == 0)
         {
             Destroy(gameObject);
-            return true;
+            score.comunicateEnemyDeath(gameObject);
         }
-        
-        return false;
+
+
     }
 
     public float GetEnemyLife()
