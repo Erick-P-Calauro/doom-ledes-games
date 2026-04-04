@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchRunningSpeed = 3f;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float playerAttackRange = 2f;
+    [SerializeField] private ScoreManager score;
 
     // Campos sem SerializeField são estado interno do Player;
     private CharacterController charController;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         charController = GetComponent<CharacterController>();
+        
         playerSpeed = playerNormalSpeed;
         charController.height = playerHeight;
         
@@ -111,7 +113,7 @@ public class PlayerController : MonoBehaviour
             isAttacking = false;
         }
         
-        if(isDamaging && playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2)
+        if(isDamaging && playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.22)
         {
             ComputateAttack();
             isDamaging= false;
