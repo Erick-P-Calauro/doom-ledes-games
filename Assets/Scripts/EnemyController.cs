@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,12 @@ public class EnemyController : MonoBehaviour
 {
 
     public float enemyPontuation = 1f;
+
+    //Controle de dano que o inimigo causa ao player
+    [SerializeField] private float attackRange = 2f; 
+    [SerializeField] private float attackCooldown = 1f; 
+    private float lastAttackTime = 0f;
+
     [SerializeField] private float enemyLife = 1f;
     [SerializeField] private float detectionRadius = 10f;
     private ScoreManager score;
@@ -36,13 +43,14 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        TryAttackPlayer();
         MoveEnemy();
         RotateEnemy();
     }
 
     void MoveEnemy()
     {
-        float distance = Vector3.Distance(transform.position, player.position);
+        float distance =  UnityEngine.Vector3.Distance(transform.position, player.position);
         if(distance <= detectionRadius)
         {
             agent.SetDestination(player.position);   
@@ -74,5 +82,25 @@ public class EnemyController : MonoBehaviour
     public float GetEnemyLife()
     {
         return enemyLife;
+    }
+
+    void TryAttackPlayer()
+    {
+        Debug.Log("Tentando atacar");
+        float distance = UnityEngine.Vector3.Distance(transform.position,player.position);
+
+        if (distance <= attackRange)
+        {
+            if(Time.time - lastAttackTime >= attackCooldown)
+            {
+                PlayerController playerController = player.GetComponent<PlayerController>();
+                if(playerController != null)
+                {
+                    Debug.Log("ATACOU!");
+                    playerController.TakeDamage();
+                    lastAttackTime = Time.time;
+                }
+            }
+        }
     }
 }
