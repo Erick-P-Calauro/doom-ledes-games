@@ -168,12 +168,18 @@ public class PlayerController : MonoBehaviour
 
     void RefreshAnimationState()
     {
-        if(!isAttacking && charController.velocity.magnitude == 0)
+        if(isAttacking)
+        {
+            playerHandAnimator.speed = 1;
+            return;
+        }
+
+        if(charController.velocity.magnitude == 0)
         {
             playerHandAnimator.speed = 0;
         }else
         {
-            playerHandAnimator.speed = 1;
+            playerHandAnimator.speed = playerSpeed/playerNormalSpeed;
         }
     }
 
