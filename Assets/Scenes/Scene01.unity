@@ -119,6 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &76452553
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +218,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5453235157363753833, guid: 419dc10dbeabc2a4ebebe460bd94f6af, type: 3}
   m_PrefabInstance: {fileID: 465346590}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> GotaBranch
 --- !u!1 &613682775
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +493,76 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< HEAD
 --- !u!1001 &1243655733
+=======
+--- !u!1001 &1070447131941500076
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 759000036820707890, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259206371328559090, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756858786830561428, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5809367874320175259, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: field of view
+      value: 54
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+--- !u!1001 &6648292492870847802
+>>>>>>> GotaBranch
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -609,6 +681,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ba9033bbbd8f8040b94446a80c95b97, type: 3}
+<<<<<<< HEAD
 --- !u!4 &1626678947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7017685279073128634, guid: 4ba9033bbbd8f8040b94446a80c95b97, type: 3}
@@ -1221,6 +1294,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffc989e47fb857046a5dc14650b77460, type: 3}
+=======
+>>>>>>> GotaBranch
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1228,6 +1303,7 @@ SceneRoots:
   - {fileID: 673937778}
   - {fileID: 3165520960592057557}
   - {fileID: 613682779}
+<<<<<<< HEAD
   - {fileID: 76452554}
   - {fileID: 5322381081788794237}
   - {fileID: 7184256811303986979}
@@ -1236,3 +1312,5 @@ SceneRoots:
   - {fileID: 6036673852803104787}
   - {fileID: 3177923878878273185}
   - {fileID: 461591500830870367}
+=======
+>>>>>>> GotaBranch

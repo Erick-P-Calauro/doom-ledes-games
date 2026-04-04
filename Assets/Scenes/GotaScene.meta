@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 3a33f306a3056bc4cb6c3e75595fe9dd
+=======
+guid: eef4427a8d41ba14ab0e7b9babb3f7d0
+>>>>>>> GotaBranch
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
