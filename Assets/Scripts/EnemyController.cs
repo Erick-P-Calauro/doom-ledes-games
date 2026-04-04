@@ -30,6 +30,8 @@ public class EnemyController : MonoBehaviour
 
     void MoveEnemy()
     {
+
+        if(!agent.isOnNavMesh)return;
         float distance = Vector3.Distance(transform.position, player.position);
         if(distance <= detectionRadius)
         {
