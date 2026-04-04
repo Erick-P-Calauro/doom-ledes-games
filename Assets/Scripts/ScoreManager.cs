@@ -18,6 +18,8 @@ public class ScoreManager : MonoBehaviour
         }
 
         scoreAvailable = scoreTotal;
+
+        shouldChangeHud = true;
     }
 
     public void comunicateHudChanged()
