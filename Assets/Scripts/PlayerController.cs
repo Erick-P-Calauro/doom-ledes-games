@@ -4,9 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {   
-    public AnimatorController playerAttack;
-    public AnimatorController playerWalk;
-
     // Campos marcados com SerializeField podem ser observados pelo Inspector
     [SerializeField] private float playerLife = 3f;
     [SerializeField] private float playerMaxLife = 3f;
@@ -23,11 +20,11 @@ public class PlayerController : MonoBehaviour
 
     // Campos sem SerializeField são estado interno do Player;
     private CharacterController charController;
-    private Animator playerHandAnimator;
+    private Animator playerAnimator;
     private float playerX = 0f;
     private float playerY = 0f;
     private float playerZ = 0f;
-    private const float GRAVITY = -9.81f;
+    private const float GRAVITY = -6f;
     private bool isCrouching = false;
     private bool isRunning = false;
     private bool isAttacking = false;
@@ -41,8 +38,14 @@ public class PlayerController : MonoBehaviour
         playerSpeed = playerNormalSpeed;
         charController.height = playerHeight;
         
+<<<<<<< HEAD
         playerHandAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
         playerHandAnimator.speed = 0;
+=======
+        playerAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
+        
+        RefreshAnimatorState();
+>>>>>>> origin/master
     }
 
     void Update()
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
         MovePlayer(movementVector);
         
         RefreshAttackState();
-        RefreshAnimationState();
+        RefreshAnimatorState();
     }
 
     void OnMove(InputValue movement)
@@ -95,25 +98,43 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnAttack() {
+        if(isAttacking)
+        {
+            return;
+        }
+
+        playerAnimator.ResetTrigger("Attack");
+        playerAnimator.SetTrigger("Attack");
         isAttacking = true;
         isDamaging = true;
+<<<<<<< HEAD
         playerHandAnimator.runtimeAnimatorController = playerAttack;
+=======
+>>>>>>> origin/master
     }
 
     void RefreshAttackState()
     {
         if(!isAttacking)
         {
-            playerHandAnimator.runtimeAnimatorController = playerWalk;
             return;
         }
 
-        if(playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+        if(state.IsName("Attack") && state.normalizedTime > 1f)
         {
             isAttacking = false;
+<<<<<<< HEAD
         }
         
         if(isDamaging && playerHandAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.22)
+=======
+            playerAnimator.ResetTrigger("Attack");
+        }
+        
+        if(isDamaging && state.IsName("Attack") && state.normalizedTime >= 0.28)
+>>>>>>> origin/master
         {
             ComputateAttack();
             isDamaging= false;
@@ -156,6 +177,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void RefreshAnimatorState()
+    {
+        playerAnimator.SetBool("IsWalking",  charController.velocity.magnitude > 0);
+        playerAnimator.SetBool("IsRunning", isRunning);
+        playerAnimator.SetBool("IsCrouching", isCrouching);
+    }
+
     float GetPlayerSpeed()
     {
         if(isCrouching)
@@ -166,6 +194,7 @@ public class PlayerController : MonoBehaviour
         return isRunning == true ? playerRunningSpeed : playerNormalSpeed;
     }
 
+<<<<<<< HEAD
     void RefreshAnimationState()
     {
         if(isAttacking)
@@ -183,6 +212,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+=======
+>>>>>>> origin/master
     public void TakeDamage()
     {
         playerLife -= 1;

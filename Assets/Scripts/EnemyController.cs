@@ -75,4 +75,8 @@ public class EnemyController : MonoBehaviour
     {
         return enemyLife;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/master

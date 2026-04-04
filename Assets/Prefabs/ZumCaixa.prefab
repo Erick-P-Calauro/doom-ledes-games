@@ -8,6 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 2643463060547377484}
   - component: {fileID: 7452277359403949020}
   - component: {fileID: 1853265299801728506}
@@ -15,6 +16,12 @@ GameObject:
   - component: {fileID: 1245396741393235162}
   - component: {fileID: 1150159424948303233}
   - component: {fileID: 7119099983491507672}
+=======
+  - component: {fileID: 5453235157363753833}
+  - component: {fileID: 2238082643398184923}
+  - component: {fileID: 5511487329168667563}
+  - component: {fileID: 6490428562300355930}
+>>>>>>> origin/master
   m_Layer: 0
   m_Name: ZumCaixa
   m_TagString: Enemy
@@ -31,8 +38,13 @@ Transform:
   m_GameObject: {fileID: 1487867674926624465}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -69.48, y: 3.423, z: -18.01}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+=======
+  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> origin/master
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 928012932576164985}
@@ -47,6 +59,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487867674926624465}
   m_Enabled: 1
+<<<<<<< HEAD
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: beeb487015e49db40a9c2f83693a5e9d, type: 2}
   m_CullingMode: 0
@@ -61,6 +74,91 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1853265299801728506
+=======
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &5511487329168667563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319929359692940834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275e63a4542b24997ef5cab59dc462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  enemyPontuation: 1
+  enemyLife: 1
+  detectionRadius: 10
+--- !u!65 &6490428562300355930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319929359692940834}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0664864, y: 1.9520305, z: 1}
+  m_Center: {x: -0.03324318, y: 0.8474954, z: 0}
+--- !u!1 &3666528455987062820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5244846462830425544}
+  - component: {fileID: 5542131744464220629}
+  m_Layer: 0
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5244846462830425544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3666528455987062820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5453235157363753833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &5542131744464220629
+>>>>>>> origin/master
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -109,7 +207,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
+<<<<<<< HEAD
   m_Sprite: {fileID: 1912123394, guid: 67115c9af7ae6ff4da56d0be018a70e3, type: 3}
+=======
+  m_Sprite: {fileID: -109997280738488821, guid: b0fe91d68a95b4b42abbe8662628af08, type: 3}
+>>>>>>> origin/master
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,6 +220,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+<<<<<<< HEAD
   m_SpriteSortPoint: 0
 --- !u!114 &2601274522029920641
 MonoBehaviour:
@@ -241,3 +344,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.6896691, z: 0.1470871}
   m_Center: {x: 0, y: -1.9295344, z: -0.053733826}
+=======
+  m_SpriteSortPoint: 1
+>>>>>>> origin/master

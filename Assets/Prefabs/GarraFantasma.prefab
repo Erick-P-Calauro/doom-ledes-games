@@ -8,6 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 7017685279073128634}
   - component: {fileID: 2666111535994133493}
   - component: {fileID: 6874355599485678466}
@@ -15,6 +16,10 @@ GameObject:
   - component: {fileID: 5832630338664792353}
   - component: {fileID: 348974248964578595}
   - component: {fileID: 6680471966753132133}
+=======
+  - component: {fileID: 8820417887363651613}
+  - component: {fileID: 1711320050780928350}
+>>>>>>> origin/master
   m_Layer: 0
   m_Name: GarraFantasma
   m_TagString: Enemy
@@ -31,12 +36,18 @@ Transform:
   m_GameObject: {fileID: 4217335005554040651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -71.78, y: 2.981, z: -16.82}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+=======
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+>>>>>>> origin/master
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!114 &2666111535994133493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +106,9 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &5832630338664792353
+=======
+--- !u!212 &1711320050780928350
+>>>>>>> origin/master
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -152,8 +166,71 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+<<<<<<< HEAD
   m_SpriteSortPoint: 0
 --- !u!114 &348974248964578595
+=======
+  m_SpriteSortPoint: 1
+--- !u!1 &4217335005554040651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7017685279073128634}
+  - component: {fileID: 8210419162871196104}
+  - component: {fileID: 2666111535994133493}
+  - component: {fileID: 6261647751768541657}
+  - component: {fileID: 455852851291705724}
+  m_Layer: 0
+  m_Name: GarraFantasma
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7017685279073128634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217335005554040651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8820417887363651613}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &8210419162871196104
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217335005554040651}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &2666111535994133493
+>>>>>>> origin/master
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,14 +241,42 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42966b8f7ea60d644a360e189319b54d, type: 3}
   m_Name: 
+<<<<<<< HEAD
   m_EditorClassIdentifier: Assembly-CSharp::EnemiesBoolParameters
 --- !u!195 &6680471966753132133
 NavMeshAgent:
+=======
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  enemyPontuation: 1
+  enemyLife: 1
+  detectionRadius: 10
+--- !u!1818360608 &6261647751768541657
+PositionConstraint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4217335005554040651}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0, y: 1, z: 0}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 0
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 0
+  m_Active: 0
+  m_IsLocked: 0
+  m_Sources: []
+--- !u!65 &455852851291705724
+BoxCollider:
+>>>>>>> origin/master
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217335005554040651}
+<<<<<<< HEAD
   m_Enabled: 1
   m_AgentTypeID: 1479372276
   m_Radius: 0.32
@@ -187,3 +292,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+=======
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6091118, y: 2.0238898, z: 0.8975702}
+  m_Center: {x: -0.03509581, y: 1.4928232, z: -0.051214904}
+>>>>>>> origin/master
