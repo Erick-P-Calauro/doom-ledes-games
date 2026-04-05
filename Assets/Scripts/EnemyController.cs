@@ -15,10 +15,9 @@ public class EnemyController : MonoBehaviour
     //Controle de dano que o inimigo causa ao player
     [SerializeField] private float attackRange = 2f; 
     [SerializeField] private float attackCooldown = 1f; 
-    private float lastAttackTime = 0f;
-
     [SerializeField] private float enemyLife = 1f;
     [SerializeField] private float detectionRadius = 10f;
+    private float lastAttackTime = 0f;
     private ScoreManager score;
     private Transform player;
     private NavMeshAgent agent;
@@ -85,7 +84,7 @@ public class EnemyController : MonoBehaviour
 
     void TryAttackPlayer()
     {
-        float distance = UnityEngine.Vector3.Distance(transform.position,player.position);
+        float distance = Vector3.Distance(transform.position,player.position);
 
         if (distance <= attackRange)
         {
