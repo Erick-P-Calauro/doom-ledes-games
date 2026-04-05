@@ -1,0 +1,74 @@
+* {
+    margin : 0;
+    padding: 0;
+}
+
+.row {
+    flex-direction: row;
+}
+
+#main-row {
+    justify-content: space-between;
+
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+
+    width: 100%;
+}
+
+#player-row {
+    align-items: flex-start;
+}
+
+#heart-row {
+    padding-top: 5px;
+}
+
+#player-div {
+    width: 80px;
+    height: 80px;
+
+    background-color: black;
+
+    margin-right: 20px;
+}
+
+#heart {
+    width: 40px;
+    height: 40px;
+
+    margin-top: 3px;
+    margin-right: 3px;
+}
+
+#col-sujeira {
+    flex-direction: column;
+    align-items: center;
+}
+
+#col-sujeira Label {
+    font-size: 22px;
+    -unity-font-style: bold;
+
+    padding-bottom: 10px;
+
+}
+
+#unity-progress-bar {
+    margin: 0;
+    height: 100%;
+    max-height: 100%;
+}
+
+.unity-progress-bar__progress {
+    background-color: red;
+    height: 100%;
+    max-height: 100%;
+}
+
+.unity-progress-bar__background {
+    background-color: white;
+    height: 100%;
+    max-height: 100%;
+}
