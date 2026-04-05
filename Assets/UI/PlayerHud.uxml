@@ -3,8 +3,8 @@
     <ui:VisualElement name="main-row" class="row" style="top: 0; left: 0;">
         <ui:VisualElement name="player-row" class="row">
             <ui:VisualElement name="player-div" style="height: 100px; width: 130px; top: 0; left: 0; aspect-ratio: 1; max-height: none; max-width: none; min-width: auto; min-height: auto;">
-                <ui:Image name="PlayerState" data-source-type="$BurstDirectCallInitializer, ScriptablePacker" source="project://database/Assets/Textures/UI/perfil1.png?fileID=2800000&amp;guid=369646d6f92a96941b10266dfcedf27f&amp;type=3#perfil1" style="width: 100%; height: 100%;"/>
-                <ui:Image name="PlayerFrame" source="project://database/Assets/Textures/UI/perfil_moldura.png?fileID=2800000&amp;guid=79c8fbf6bb5a3774c90429dd1c9a6716&amp;type=3#perfil_moldura" style="position: absolute; width: 130px; height: 130px;"/>
+                <ui:Image name="playerState" data-source-type="$BurstDirectCallInitializer, ScriptablePacker" source="project://database/Assets/Textures/UI/perfil1.png?fileID=2800000&amp;guid=369646d6f92a96941b10266dfcedf27f&amp;type=3#perfil1" style="width: 100%; height: 100%;"/>
+                <ui:Image name="playerFrame" source="project://database/Assets/Textures/UI/perfil_moldura.png?fileID=2800000&amp;guid=79c8fbf6bb5a3774c90429dd1c9a6716&amp;type=3#perfil_moldura" style="position: absolute; width: 130px; height: 130px;"/>
             </ui:VisualElement>
             <ui:VisualElement name="heart-row" class="row"/>
         </ui:VisualElement>

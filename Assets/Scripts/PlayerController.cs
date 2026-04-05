@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {   
     // Campos marcados com SerializeField podem ser observados pelo Inspector
-    [SerializeField] private float playerLife = 3f;
-    [SerializeField] private float playerMaxLife = 3f;
+    [SerializeField] private int playerLife = 3;
+    [SerializeField] private int playerMaxLife = 3;
     [SerializeField] private float playerNormalSpeed = 5f;
     [SerializeField] private float playerRunningSpeed = 10f;
     [SerializeField] private float playerHeight = 2f;
@@ -195,12 +195,12 @@ public class PlayerController : MonoBehaviour
         damageTaken = true;
     }
 
-    public float GetPlayerLife()
+    public int GetPlayerLife()
     {
         return playerLife;
     }
 
-    public float GetPlayerMaxLife()
+    public int GetPlayerMaxLife()
     {
         return playerMaxLife;    
     }

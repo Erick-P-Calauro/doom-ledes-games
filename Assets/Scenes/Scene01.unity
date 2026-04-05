@@ -815,6 +815,18 @@ PrefabInstance:
       propertyPath: score
       value: 
       objectReference: {fileID: 6496590406533847619, guid: 24a3d277f9d63bb4bb95adc7a5f522ed, type: 3}
+    - target: {fileID: 6744472001562941193, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: playerLowLifeIcon
+      value: 
+      objectReference: {fileID: 2800000, guid: 4b7b6c91a4070fe4abc446d329c12a08, type: 3}
+    - target: {fileID: 6744472001562941193, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: playerMidLifeIcon
+      value: 
+      objectReference: {fileID: 2800000, guid: 83506f22ea78bb2489cd0217bd17370b, type: 3}
+    - target: {fileID: 6744472001562941193, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: playerFullLifeIcon
+      value: 
+      objectReference: {fileID: 2800000, guid: 369646d6f92a96941b10266dfcedf27f, type: 3}
     - target: {fileID: 8262984872496724805, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
       propertyPath: m_Weight
       value: 1
