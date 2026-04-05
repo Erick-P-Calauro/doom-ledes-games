@@ -26,14 +26,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
-        try
-        {
-            score = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
-        }catch(Exception e)
-        {
-            Debug.Log("Enemy Exception : " + e.ToString());
-        }
+        score = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
 
         player = GameObject.FindWithTag("Player").transform;
         playerCamera = Camera.main;
@@ -73,8 +66,6 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
             score.comunicateEnemyDeath(gameObject);
         }
-
-
     }
 
     public float GetEnemyLife()

@@ -1,3 +1,4 @@
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +16,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchRunningSpeed = 3f;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float playerAttackRange = 2f;
-    [SerializeField] private ScoreManager score;
     [SerializeField] private float knockbackForce = 25f;
     [SerializeField] private Vector3 knockbackVelocity;
     // Campos sem SerializeField são estado interno do Player;
@@ -28,8 +28,9 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching = false;
     private bool isRunning = false;
     private bool isAttacking = false;
+    private bool isDamaging = false;
 
-    public bool isDamaging = false;
+    private bool damageTaken = false;
 
     void Start()
     {
@@ -190,6 +191,8 @@ public class PlayerController : MonoBehaviour
         
         Vector3 direction = (transform.position - attackerPosition).normalized;
         knockbackVelocity = direction * knockbackForce;
+
+        damageTaken = true;
     }
 
     public float GetPlayerLife()
@@ -200,5 +203,15 @@ public class PlayerController : MonoBehaviour
     public float GetPlayerMaxLife()
     {
         return playerMaxLife;    
+    }
+
+    public bool DamageTaken()
+    {
+        return damageTaken;
+    }
+
+    public void ResetDamageTaken()
+    {
+        damageTaken = false;
     }
 }   
