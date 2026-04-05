@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abb5fa71bbbce648a9082b1b2c5e092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  knockbackForce: 23
   playerLife: 3
   playerMaxLife: 3
   playerNormalSpeed: 5
