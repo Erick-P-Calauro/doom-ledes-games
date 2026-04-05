@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   enemyPontuation: 1
-  attackRange: 2
+  attackRange: 1.4
   attackCooldown: 1
   enemyLife: 1
   detectionRadius: 10
