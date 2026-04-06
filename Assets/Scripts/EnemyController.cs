@@ -62,22 +62,6 @@ public class EnemyController : MonoBehaviour
         transform.rotation = playerCamera.transform.rotation;        
     }
 
-    public void TakeDamage()
-    {
-        enemyLife -= 1;
-        
-        if(enemyLife == 0)
-        {
-            Destroy(gameObject);
-            score.comunicateEnemyDeath(gameObject);
-        }
-    }
-
-    public float GetEnemyLife()
-    {
-        return enemyLife;
-    }
-
     void TryAttackPlayer()
     {
         float distance = Vector3.Distance(transform.position,player.position);
@@ -94,5 +78,21 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TakeDamage()
+    {
+        enemyLife -= 1;
+        
+        if(enemyLife == 0)
+        {
+            Destroy(gameObject);
+            score.comunicateEnemyDeath(gameObject);
+        }
+    }
+
+    public float GetEnemyLife()
+    {
+        return enemyLife;
     }
 }

@@ -7,7 +7,13 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/GotaScene.unity
-    guid: d3feb0134c272324c9cf08e9e531e265
+    guid: 59e485fcf6d5b434b80a3bd2031b9983
+  - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: ba78a09b0dcfe074f8a15d0ed376f797
+  - enabled: 1
+    path: Assets/Scenes/Scene01.unity
+    guid: 24b89e6f1062ca9419c3fe6efe8b417f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
