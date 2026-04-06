@@ -21,11 +21,14 @@ public class EnemyController : MonoBehaviour
     private ScoreManager score;
     private Transform player;
     private NavMeshAgent agent;
+    private Animator animator;
     private Camera playerCamera;
    
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
+
         score = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
 
         player = GameObject.FindWithTag("Player").transform;
@@ -50,6 +53,8 @@ public class EnemyController : MonoBehaviour
         {
             agent.ResetPath();
         }
+
+        animator.SetBool("IsMoving",agent.velocity.magnitude > 0.1f);
     }
 
     void RotateEnemy()
