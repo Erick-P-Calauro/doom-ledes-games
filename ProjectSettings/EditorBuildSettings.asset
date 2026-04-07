@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GotaScene.unity
     guid: 59e485fcf6d5b434b80a3bd2031b9983
   - enabled: 1
@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DieScene.unity
     guid: aa6cd17e5d193034db36710e2cd76642
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: fb0c9db8bbf306e4588b20e686de8602
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
