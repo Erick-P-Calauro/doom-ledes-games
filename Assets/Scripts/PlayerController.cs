@@ -1,6 +1,7 @@
-using Unity.VectorGraphics;
 using UnityEngine;
+using Unity.VectorGraphics;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {   
@@ -29,7 +30,6 @@ public class PlayerController : MonoBehaviour
     private bool isRunning = false;
     private bool isAttacking = false;
     private bool isDamaging = false;
-
     private bool damageTaken = false;
 
     void Start()
@@ -189,10 +189,23 @@ public class PlayerController : MonoBehaviour
     {
         playerLife -= 1;
         
+        if(playerLife == 0)
+        {
+            Die();
+        }
+
         Vector3 direction = (transform.position - attackerPosition).normalized;
         knockbackVelocity = direction * knockbackForce;
 
         damageTaken = true;
+    }
+
+    private void Die()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        SceneManager.LoadSceneAsync("DieScene");
     }
 
     public int GetPlayerLife()
