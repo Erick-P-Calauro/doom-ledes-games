@@ -9,6 +9,12 @@ Este script é inserido no inimigo(enemy) e
 */
 public class EnemyController : MonoBehaviour
 {
+    //lidando com knockback 
+    private Vector3 knockbackDirection;
+    private float knockbackTimer = 0f;
+    public float knockbackDuration = 0.3f;
+    [SerializeField] private float knockbackForce = 5f;
+
 
     public float enemyPontuation = 1f;
 
@@ -37,6 +43,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        knockback();
         TryAttackPlayer();
         MoveEnemy();
         RotateEnemy();
@@ -45,11 +52,13 @@ public class EnemyController : MonoBehaviour
     void MoveEnemy()
     {
         float distance =  Vector3.Distance(transform.position, player.position);
-        if(distance <= detectionRadius)
+
+        //começa a conferir se o agente esta ativo por conta do sistema de knockback
+        if(agent.enabled && distance <= detectionRadius)
         {
-            agent.SetDestination(player.position);   
+            agent.SetDestination(player.position);
         }
-        else
+        else if(agent.enabled)
         {
             agent.ResetPath();
         }
@@ -83,6 +92,12 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage()
     {
         enemyLife -= 1;
+        animator.SetTrigger("WasHit");
+
+        //Calcula direção e duração do knockback
+        knockbackDirection = (transform.position - player.position).normalized;
+        knockbackTimer = knockbackDuration;
+        knockbackDirection.y = 0f;
         
         if(enemyLife == 0)
         {
@@ -94,5 +109,21 @@ public class EnemyController : MonoBehaviour
     public float GetEnemyLife()
     {
         return enemyLife;
+    }
+
+
+    //aplica o knockback
+    void knockback()
+    {
+        if(knockbackTimer > 0)
+        {
+            agent.enabled = false;
+            transform.Translate(knockbackDirection * knockbackForce * Time.deltaTime, Space.World);
+            knockbackTimer -= Time.deltaTime;
+        }
+        else
+        {
+            agent.enabled = true;
+        }
     }
 }

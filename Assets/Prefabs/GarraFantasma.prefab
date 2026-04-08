@@ -142,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 7752915866233569952}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 64.591385, y: 0.00000030425372, z: -13.7415285}
   m_LocalScale: {x: 1.6379734, y: 1.7102641, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -204,6 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14275e63a4542b24997ef5cab59dc462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  knockbackDuration: 0.3
+  knockbackForce: 5
   enemyPontuation: 1
   attackRange: 1.4
   attackCooldown: 1
