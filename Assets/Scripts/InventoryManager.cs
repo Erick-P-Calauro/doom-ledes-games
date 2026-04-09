@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public bool shouldChangeHud = false;
     private Dictionary<CollectablesEnum, int> inventory = new Dictionary<CollectablesEnum, int>();
 
     void Start()
@@ -17,5 +18,16 @@ public class InventoryManager : MonoBehaviour
     public void AddItem(CollectablesEnum collectable)
     {
         inventory[collectable] += 1;
+        shouldChangeHud = true;
+    }
+
+    public void ComunicateHudChanged()
+    {
+        shouldChangeHud = false;
+    }
+
+    public Dictionary<CollectablesEnum, int> GetInventory()
+    {
+        return inventory;
     }
 }

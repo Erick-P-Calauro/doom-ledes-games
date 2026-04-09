@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PlayerHudController : MonoBehaviour
 {
     [SerializeField] private ScoreManager score;
+    [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private Texture2D fullHeartImage;
     [SerializeField] private Texture2D emptyHeartImage;
     [SerializeField] private Texture2D playerFullLifeIcon;
@@ -16,21 +18,33 @@ public class PlayerHudController : MonoBehaviour
     private VisualElement mainRow;
     private Image playerState;
     private ProgressBar progressBar;
+    private VisualElement rowInventory;
     
     void Start()
+    {        
+        InitializeUIDocumentFields();
+        InitializeComponents();
+        repaintLife();
+        repaintPoints();
+        repaintInventory(inventoryManager.GetInventory());
+    }
+
+    void InitializeUIDocumentFields()
     {
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement;
-        score = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
 
         mainRow = root.Query(name: "heart-row");
         progressBar = root.Query<ProgressBar>(name: "progress-sujeira");
         playerState = root.Query<Image>(name: "playerState");
+        rowInventory = root.Query<VisualElement>(name: "row-inventory");
+    }
 
+    void InitializeComponents()
+    {
+        score = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        repaintLife();
-        repaintPoints();
     }
 
     void Update()
@@ -40,10 +54,14 @@ public class PlayerHudController : MonoBehaviour
             repaintPoints();
         }
 
+        if(inventoryManager.shouldChangeHud)
+        {
+            repaintInventory(inventoryManager.GetInventory());
+        }
+
         if(player.LifeChanged())
         {
             repaintLife();
-            player.ResetLifeChange();
         }
     }
 
@@ -93,6 +111,8 @@ public class PlayerHudController : MonoBehaviour
         {
             playerState.image = playerFullLifeIcon;
         }
+
+        player.ResetLifeChange();
     }
 
     public void repaintPoints()
@@ -103,5 +123,14 @@ public class PlayerHudController : MonoBehaviour
         score.comunicateHudChanged();
     }
 
+    public void repaintInventory(Dictionary<CollectablesEnum, int> inventory)
+    {
+        foreach(VisualElement col in rowInventory.Children())
+        {
+            Label label = col.Query<Label>(name: "InventoryLabel");
+            label.text = inventory[Enum.Parse<CollectablesEnum>(col.name)].ToString();
+        }
 
+        inventoryManager.ComunicateHudChanged();
+    }
 }

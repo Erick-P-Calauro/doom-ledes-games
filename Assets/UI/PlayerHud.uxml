@@ -8,9 +8,33 @@
             </ui:VisualElement>
             <ui:VisualElement name="heart-row" class="row"/>
         </ui:VisualElement>
-        <ui:VisualElement name="col-sujeira" class="col" style="top: 0; left: auto; right: 0; bottom: auto; width: auto; align-self: flex-start;">
-            <ui:ProgressBar name="progress-sujeira" title="" minValue="0" hightValue="100" value="100" data-source-type="UnityEngine.Sprite, UnityEngine.CoreModule" style="flex-direction: column; position: absolute; display: flex; align-self: flex-end; justify-content: center; top: 10px; width: auto; height: auto; left: 42px; right: 42px; bottom: 6px; max-width: 100%;"/>
-            <ui:Image name="container-sujeira" source="project://database/Assets/Textures/UI/barra_completar.png?fileID=2800000&amp;guid=69464ea10e0cfeb4db36fbbddce9555e&amp;type=3#barra_completar" tint-color="rgb(255, 255, 255)" scale-mode="ScaleToFit" tabindex="0" picking-mode="Position" style="height: 56px; width: 332px; position: relative; left: auto; top: auto; scale: 1 1; translate: 0 0 1px; right: auto; bottom: auto;"/>
+        <ui:VisualElement name="score-and-inventory" class="col">
+            <ui:VisualElement name="col-sujeira" class="col" style="top: 0; left: auto; right: 0; bottom: auto; width: auto; align-self: flex-start;">
+                <ui:ProgressBar name="progress-sujeira" title="" minValue="0" hightValue="100" value="100" data-source-type="UnityEngine.Sprite, UnityEngine.CoreModule" style="flex-direction: column; position: absolute; display: flex; align-self: flex-end; justify-content: center; top: 10px; width: auto; height: auto; left: 42px; right: 42px; bottom: 6px; max-width: 100%;"/>
+                <ui:Image name="container-sujeira" source="project://database/Assets/Textures/UI/barra_completar.png?fileID=2800000&amp;guid=69464ea10e0cfeb4db36fbbddce9555e&amp;type=3#barra_completar" tint-color="rgb(255, 255, 255)" scale-mode="ScaleToFit" tabindex="0" picking-mode="Position" style="height: 56px; width: 332px; position: relative; left: auto; top: auto; scale: 1 1; translate: 0 0 1px; right: auto; bottom: auto;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="row-inventory" class="row" style="top: auto; right: auto; margin-top: 15px; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+                <ui:VisualElement name="Papel" class="col" style="flex-grow: 1; right: auto; margin-right: 8px;">
+                    <ui:Image name="InventoryIcon" data-source-type="UnityEditor.SerializedPropertyFilters+None, UnityEditor.CoreModule" source="project://database/Assets/Textures/Collectables/coletaveis.aseprite?fileID=5702867024054018086&amp;guid=eca48ff687200a542aef4287fdb003f7&amp;type=3#papelão" style="min-width: auto; aspect-ratio: auto; min-height: auto; height: 46.87px; width: 60px;"/>
+                    <ui:Label text="0" name="InventoryLabel" style="font-size: 20px; -unity-text-align: upper-center; color: rgb(0, 0, 0); -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&quot;); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Plastico" class="col" style="flex-grow: 1; right: auto; margin-right: 8px;">
+                    <ui:Image name="InventoryIcon" data-source-type="UnityEditor.SerializedPropertyFilters+None, UnityEditor.CoreModule" source="project://database/Assets/Textures/Collectables/coletaveis.aseprite?fileID=484168773646143741&amp;guid=eca48ff687200a542aef4287fdb003f7&amp;type=3#garrafa_plastico" style="min-width: auto; aspect-ratio: auto; min-height: auto; height: 46.87px; width: 60px; -unity-text-align: upper-left;"/>
+                    <ui:Label text="0" name="InventoryLabel" style="font-size: 20px; -unity-text-align: upper-center; color: rgb(0, 0, 0); -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&quot;); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Metal" class="col" style="flex-grow: 1; right: auto; margin-right: 8px;">
+                    <ui:Image name="InventoryIcon" data-source-type="UnityEditor.SerializedPropertyFilters+None, UnityEditor.CoreModule" source="project://database/Assets/Textures/Collectables/coletaveis.aseprite?fileID=-3730899679993550123&amp;guid=eca48ff687200a542aef4287fdb003f7&amp;type=3#lata" style="min-width: auto; aspect-ratio: auto; min-height: auto; height: 46.87px; width: 60px;"/>
+                    <ui:Label text="0" name="InventoryLabel" style="font-size: 20px; -unity-text-align: upper-center; color: rgb(0, 0, 0); -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&quot;); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Vidro" class="col" style="flex-grow: 1; right: auto; margin-right: 8px;">
+                    <ui:Image name="InventoryIcon" data-source-type="UnityEditor.SerializedPropertyFilters+None, UnityEditor.CoreModule" source="project://database/Assets/Textures/Collectables/coletaveis.aseprite?fileID=8400899695915000246&amp;guid=eca48ff687200a542aef4287fdb003f7&amp;type=3#garrafa" style="min-width: auto; aspect-ratio: auto; min-height: auto; height: 46.87px; width: 60px;"/>
+                    <ui:Label text="0" name="InventoryLabel" style="font-size: 20px; -unity-text-align: upper-center; color: rgb(0, 0, 0); -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&quot;); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Organico" class="col" style="flex-grow: 1; right: auto; margin-right: 8px;">
+                    <ui:Image name="InventoryIcon" data-source-type="UnityEditor.SerializedPropertyFilters+None, UnityEditor.CoreModule" source="project://database/Assets/Textures/Collectables/coletaveis.aseprite?fileID=4858003123383264141&amp;guid=eca48ff687200a542aef4287fdb003f7&amp;type=3#casca_banana" style="min-width: auto; aspect-ratio: auto; min-height: auto; height: 46.87px; width: 60px;"/>
+                    <ui:Label text="0" name="InventoryLabel" style="font-size: 20px; -unity-text-align: upper-center; color: rgb(0, 0, 0); -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&quot;); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
