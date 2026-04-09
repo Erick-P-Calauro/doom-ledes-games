@@ -209,5 +209,5 @@ MonoBehaviour:
   enemyPontuation: 1
   attackRange: 1.4
   attackCooldown: 1
-  enemyLife: 2
+  enemyLife: 1
   detectionRadius: 10
