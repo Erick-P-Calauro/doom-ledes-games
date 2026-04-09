@@ -663,6 +663,14 @@ PrefabInstance:
       propertyPath: field of view
       value: 56
       objectReference: {fileID: 0}
+    - target: {fileID: 5055419070153303375, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 5055419070153303375, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6744472001562941193, guid: cdcfeaf1aa5d8644fb69fdb9ccaf35b1, type: 3}
       propertyPath: score
       value: 

@@ -64,7 +64,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &2075088795211055838
@@ -92,6 +92,8 @@ MonoBehaviour:
   playerAttackRange: 2
   knockbackForce: 23
   knockbackVelocity: {x: 0, y: 0, z: 0}
+  attackingSoundClip: {fileID: 8300000, guid: e613cc9afa691e24db26c1a99b5d7d9a, type: 3}
+  damageDealSoundClip: {fileID: 8300000, guid: add0230ba569bda4a93fcda651ec0240, type: 3}
 --- !u!143 &6267254660636640805
 CharacterController:
   m_ObjectHideFlags: 0

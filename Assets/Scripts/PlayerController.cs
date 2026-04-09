@@ -19,9 +19,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerAttackRange = 2f;
     [SerializeField] private float knockbackForce = 25f;
     [SerializeField] private Vector3 knockbackVelocity;
+    [SerializeField] private AudioClip attackingSoundClip;
+    [SerializeField] private AudioClip damageDealSoundClip;
     // Campos sem SerializeField são estado interno do Player;
     private CharacterController charController;
     private Animator playerAnimator;
+    private AudioSource attackingSound;
+    private AudioSource damageDealSound;
     private float playerX = 0f;
     private float playerY = 0f;
     private float playerZ = 0f;
@@ -31,29 +35,126 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     private bool isDamaging = false;
     private bool damageTaken = false;
+    private bool damageDeal = false;
 
     void Start()
     {
         charController = GetComponent<CharacterController>();
-        
+        playerAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
+
         playerSpeed = playerNormalSpeed;
         charController.height = playerHeight;
         
-        playerAnimator = GameObject.FindGameObjectWithTag("CameraAttach").GetComponent<Animator>();
-        
-        RefreshAnimatorState();
+        UpdateAnimatorState();
+        StartSoundComponents();
+    }
+
+    void StartSoundComponents()
+    {
+        attackingSound = gameObject.AddComponent<AudioSource>();
+        attackingSound.clip = attackingSoundClip;
+        attackingSound.loop = false;
+
+        damageDealSound = gameObject.AddComponent<AudioSource>();
+        damageDealSound.clip = damageDealSoundClip;
+        damageDealSound.loop = false;
     }
 
     void Update()
     {   
+        UpdatePosition();
+        UpdateAttackState();
+        UpdateAnimatorState();
+        UpdateSoundEffects();
+    }
+
+    void UpdatePosition()
+    {
         playerSpeed = GetPlayerSpeed();
         
         // Precisa levar em conta up, right e forward (eixos no espaço) para se mover com base na rotação da câmera
         Vector3 movementVector = (playerX * transform.right.normalized) + (playerY * transform.up.normalized) + (playerZ * transform.forward.normalized);
         MovePlayer(movementVector);
+    }
+
+    void UpdateAttackState()
+    {
+        if(!isAttacking)
+        {
+            return;
+        }
+
+        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+        if(state.IsName("Attack") && state.normalizedTime > 1f)
+        {
+            isAttacking = false;
+            playerAnimator.ResetTrigger("Attack");
+            damageDeal = false;
+        }
         
-        RefreshAttackState();
-        RefreshAnimatorState();
+        if(isDamaging && state.IsName("Attack") && state.normalizedTime >= 0.28)
+        {
+            ComputateAttack();
+            isDamaging = false;
+        }
+    }
+
+
+    void ComputateAttack()
+    {
+        Collider[] collidersNearby = Physics.OverlapSphere(transform.position, playerAttackRange);
+        
+        float bestAngle = 41f;
+        Collider bestTarget = null;
+
+        foreach(Collider c in collidersNearby)
+        {
+            if(!c.CompareTag("Enemy"))
+            {
+                continue;
+            }
+
+            // Usa o centro do collider e não do gameobject do enemy.
+            Vector3 directionToColider = (c.transform.position - transform.position).normalized;
+            float angleBetweenObjects = Vector3.Angle(transform.forward, directionToColider);
+            
+            // Lógica para pegar o alvo mais adequado à mira do jogador 
+            if(angleBetweenObjects <= 40f && bestAngle > angleBetweenObjects)
+            {
+                bestTarget = c;
+                bestAngle = angleBetweenObjects;
+            }
+        }
+
+        if(bestTarget != null)
+        {
+            GameObject enemy = bestTarget.gameObject;
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+
+            enemyController.TakeDamage();
+            damageDeal = true;
+        }
+    }
+
+    void UpdateAnimatorState()
+    {
+        playerAnimator.SetBool("IsWalking",  charController.velocity.magnitude > 0);
+        playerAnimator.SetBool("IsRunning", isRunning);
+        playerAnimator.SetBool("IsCrouching", isCrouching);
+    }
+
+    void UpdateSoundEffects()
+    {
+        if(isAttacking && !attackingSound.isPlaying)
+        {
+            attackingSound.Play();
+        }
+
+        if(damageDeal && !damageDealSound.isPlaying)
+        {
+            damageDealSound.Play();
+        }
     }
 
     void OnMove(InputValue movement)
@@ -108,71 +209,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetTrigger("Attack");
         isAttacking = true;
         isDamaging = true;
-    }
-
-    void RefreshAttackState()
-    {
-        if(!isAttacking)
-        {
-            return;
-        }
-
-        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
-
-        if(state.IsName("Attack") && state.normalizedTime > 1f)
-        {
-            isAttacking = false;
-            playerAnimator.ResetTrigger("Attack");
-        }
-        
-        if(isDamaging && state.IsName("Attack") && state.normalizedTime >= 0.28)
-        {
-            ComputateAttack();
-            isDamaging= false;
-        }
-    }
-
-
-    void ComputateAttack()
-    {
-        Collider[] collidersNearby = Physics.OverlapSphere(transform.position, playerAttackRange);
-        
-        float bestAngle = 41f;
-        Collider bestTarget = null;
-
-        foreach(Collider c in collidersNearby)
-        {
-            if(!c.CompareTag("Enemy"))
-            {
-                continue;
-            }
-
-            // Usa o centro do collider e não do gameobject do enemy.
-            Vector3 directionToColider = (c.transform.position - transform.position).normalized;
-            float angleBetweenObjects = Vector3.Angle(transform.forward, directionToColider);
-            
-            // Lógica para pegar o alvo mais adequado à mira do jogador 
-            if(angleBetweenObjects <= 40f && bestAngle > angleBetweenObjects)
-            {
-                bestTarget = c;
-                bestAngle = angleBetweenObjects;
-            }
-        }
-
-        if(bestTarget != null)
-        {
-            GameObject enemy = bestTarget.gameObject;
-            EnemyController enemyController = enemy.GetComponent<EnemyController>();
-
-            enemyController.TakeDamage();
-        }
-    }
-
-    void RefreshAnimatorState()
-    {
-        playerAnimator.SetBool("IsWalking",  charController.velocity.magnitude > 0);
-        playerAnimator.SetBool("IsRunning", isRunning);
-        playerAnimator.SetBool("IsCrouching", isCrouching);
     }
 
     float GetPlayerSpeed()
