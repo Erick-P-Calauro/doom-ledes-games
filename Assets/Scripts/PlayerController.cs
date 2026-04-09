@@ -1,5 +1,4 @@
 using UnityEngine;
-using Unity.VectorGraphics;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System;

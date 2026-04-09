@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinSceneController
   enemies_text: {fileID: 78611504}
+  collectables_text: {fileID: 1865972996}
   total_text: {fileID: 351461571}
 --- !u!1 &78611502
 GameObject:

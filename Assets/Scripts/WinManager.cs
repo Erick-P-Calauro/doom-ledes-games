@@ -33,6 +33,7 @@ public class WinController : MonoBehaviour
         PlayerScoreData data =  ScriptableObject.CreateInstance<PlayerScoreData>();
         
         data.enemiesScore = score_values["enemies"];
+        data.collectablesScore = score_values["collectables"];
         data.totalScore = score_values["total"];
         
         UnityEditor.AssetDatabase.CreateAsset(data, "Assets/score_data.asset");
