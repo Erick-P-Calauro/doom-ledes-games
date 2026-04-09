@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.VectorGraphics;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerController : MonoBehaviour
 {   
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchRunningSpeed = 3f;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float playerAttackRange = 2f;
+    [SerializeField] private float playerAttackDelay = 300; // Milliseconds
     [SerializeField] private float knockbackForce = 25f;
     [SerializeField] private Vector3 knockbackVelocity;
     [SerializeField] private AudioClip attackingSoundClip;
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching = false;
     private bool isRunning = false;
     private bool isAttacking = false;
+    private DateTime lastAttack = DateTime.MinValue;
     private bool isDamaging = false;
     private bool damageTaken = false;
     private bool healTaken = false;
@@ -95,9 +98,10 @@ public class PlayerController : MonoBehaviour
 
         if(state.IsName("Attack") && state.normalizedTime > 1f)
         {
-            isAttacking = false;
             playerAnimator.ResetTrigger("Attack");
+            isAttacking = false;
             damageDeal = false;
+            lastAttack = DateTime.Now;
         }
         
         if(isDamaging && state.IsName("Attack") && state.normalizedTime >= 0.28)
@@ -210,7 +214,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnAttack() {
-        if(isAttacking)
+        if(isAttacking || (DateTime.Now.Subtract(lastAttack).Milliseconds < playerAttackDelay))
         {
             return;
         }
