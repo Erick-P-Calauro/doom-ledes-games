@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchRunningSpeed = 3f;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float playerAttackRange = 2f;
-    [SerializeField] private float playerAttackDelay = 100; // Milliseconds
+    [SerializeField] private double playerAttackDelay = 100; // Milliseconds
     [SerializeField] private float knockbackForce = 25f;
     [SerializeField] private Vector3 knockbackVelocity;
     [SerializeField] private AudioClip attackingSoundClip;
@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnAttack() {
-        if(isAttacking || (DateTime.Now.Subtract(lastAttack).Milliseconds < playerAttackDelay))
+        if(isAttacking || (DateTime.Now.Subtract(lastAttack).TotalMilliseconds < playerAttackDelay))
         {
             return;
         }

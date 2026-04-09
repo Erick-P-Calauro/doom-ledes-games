@@ -15,7 +15,6 @@ public class EnemyController : MonoBehaviour
     public float knockbackDuration = 0.3f;
     [SerializeField] private float knockbackForce = 5f;
 
-
     public float enemyPontuation = 1f;
 
     //Controle de dano que o inimigo causa ao player
@@ -23,12 +22,20 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float attackCooldown = 1f; 
     [SerializeField] private float enemyLife = 1f;
     [SerializeField] private float detectionRadius = 10f;
+    [SerializeField] private double idleAudioDelay = 4500; // Milliseconds.
+    [SerializeField] private AudioClip idleAudioClip;
+    [SerializeField] private AudioClip damageTakenAudioClip;
+    private AudioSource idleAudio;
+    private AudioSource damageTakenAudio;
     private float lastAttackTime = 0f;
     private ScoreManager score;
     private Transform player;
     private NavMeshAgent agent;
     private Animator animator;
     private Camera playerCamera;
+    private bool damageTaken = false;
+
+    private DateTime lastIdleSound = DateTime.MinValue;
    
     void Start()
     {
@@ -39,6 +46,20 @@ public class EnemyController : MonoBehaviour
 
         player = GameObject.FindWithTag("Player").transform;
         playerCamera = Camera.main;
+
+        StartSoundEffects();
+    }
+
+    void StartSoundEffects()
+    {
+        idleAudio = gameObject.AddComponent<AudioSource>();
+        idleAudio.loop = false;
+        idleAudio.clip = idleAudioClip;
+        idleAudio.volume = 0.7f;
+
+        damageTakenAudio = gameObject.AddComponent<AudioSource>();
+        damageTakenAudio.loop = false;
+        damageTakenAudio.clip = damageTakenAudioClip;
     }
 
     void Update()
@@ -47,6 +68,22 @@ public class EnemyController : MonoBehaviour
         TryAttackPlayer();
         MoveEnemy();
         RotateEnemy();
+        UpdateSoundEffects();
+    }
+
+    void UpdateSoundEffects()
+    {
+        if(DateTime.Now.Subtract(lastIdleSound).TotalMilliseconds > idleAudioDelay && !idleAudio.isPlaying && agent.velocity.magnitude > 0.1f)
+        {
+            idleAudio.Play();
+            lastIdleSound = DateTime.Now;
+        }
+
+        if(!damageTakenAudio.isPlaying && damageTaken)
+        {
+            damageTakenAudio.Play();
+            damageTaken = false;
+        }
     }
 
     void MoveEnemy()
@@ -80,6 +117,7 @@ public class EnemyController : MonoBehaviour
             if(Time.time - lastAttackTime >= attackCooldown)
             {
                 PlayerController playerController = player.GetComponent<PlayerController>();
+                
                 if(playerController != null)
                 {
                     playerController.TakeDamage(transform.position);
@@ -93,6 +131,7 @@ public class EnemyController : MonoBehaviour
     {
         enemyLife -= 1;
         animator.SetTrigger("WasHit");
+        damageTaken = true;
 
         //Calcula direção e duração do knockback
         knockbackDirection = (transform.position - player.position).normalized;
@@ -101,6 +140,7 @@ public class EnemyController : MonoBehaviour
         
         if(enemyLife == 0)
         {
+            UpdateSoundEffects();
             Destroy(gameObject);
             score.comunicateEnemyDeath(gameObject);
         }
@@ -110,7 +150,6 @@ public class EnemyController : MonoBehaviour
     {
         return enemyLife;
     }
-
 
     //aplica o knockback
     void Knockback()

@@ -55,6 +55,9 @@ MonoBehaviour:
   attackCooldown: 1
   enemyLife: 4
   detectionRadius: 10
+  idleAudioDelay: 1000
+  idleAudioClip: {fileID: 8300000, guid: 7f5556df413dc714f8fde8f34d77cf3e, type: 3}
+  damageTakenAudioClip: {fileID: 8300000, guid: 84a63a89ff8ea1f4498c3b455ee4e377, type: 3}
 --- !u!195 &7198359947649336897
 NavMeshAgent:
   m_ObjectHideFlags: 0
