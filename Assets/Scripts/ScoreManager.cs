@@ -17,12 +17,13 @@ public class ScoreManager : MonoBehaviour
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         scoreValues.Add("enemies", 0);
+        scoreValues.Add("total", 0);
 
         scoreTotal = 0f;
 
         foreach(GameObject e in enemies)
         {
-            scoreTotal += e.GetComponent<EnemyController>().enemyPontuation;
+            scoreTotal += e.GetComponent<EnemyController>().enemyPontuation * 100;
         }
 
         scoreAvailable = scoreTotal;
@@ -34,14 +35,25 @@ public class ScoreManager : MonoBehaviour
         shouldChangeHud = false;
     }
 
+    void RefreshTotalScore(float score)
+    {
+        scoreValues["total"] += score;
+    }
+
+    void RefreshEnemyScore(float score)
+    {
+        scoreValues["enemies"] += score;
+        RefreshTotalScore(score);
+    }
+
     public void comunicateEnemyDeath(GameObject enemy)
     {
-        float enemyPontuation = enemy.GetComponent<EnemyController>().enemyPontuation;
+        float enemyPontuation = enemy.GetComponent<EnemyController>().enemyPontuation * 100;
 
         scoreAvailable -= enemyPontuation;
         shouldChangeHud = true;
 
-        scoreValues["enemies"] += enemyPontuation * 100;
+        RefreshEnemyScore(enemyPontuation);
     }
 
     public int getPontuationPercentage()

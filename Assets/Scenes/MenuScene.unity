@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f08db9cae26957409644bb806de578d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartController
-  sceneName: Scene01
+  sceneName: GotaScene
 --- !u!1 &1496738553886248008
 GameObject:
   m_ObjectHideFlags: 0

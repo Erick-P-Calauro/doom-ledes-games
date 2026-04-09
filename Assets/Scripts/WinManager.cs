@@ -21,9 +21,21 @@ public class WinController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            ScoreData.scoreValues = score.getScoreValues();
+            CreateAndSaveScoreAsset();
+
             SceneManager.LoadScene("WinScene");
         }
+    }
+
+    void CreateAndSaveScoreAsset()
+    {
+        var score_values = score.getScoreValues();
+        PlayerScoreData data =  ScriptableObject.CreateInstance<PlayerScoreData>();
+        
+        data.enemiesScore = score_values["enemies"];
+        data.totalScore = score_values["total"];
+        
+        UnityEditor.AssetDatabase.CreateAsset(data, "Assets/score_data.asset");
     }
 
 }
