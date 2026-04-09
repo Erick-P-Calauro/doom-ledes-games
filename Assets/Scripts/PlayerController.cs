@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchRunningSpeed = 3f;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float playerAttackRange = 2f;
-    [SerializeField] private float playerAttackDelay = 300; // Milliseconds
+    [SerializeField] private float playerAttackDelay = 100; // Milliseconds
     [SerializeField] private float knockbackForce = 25f;
     [SerializeField] private Vector3 knockbackVelocity;
     [SerializeField] private AudioClip attackingSoundClip;

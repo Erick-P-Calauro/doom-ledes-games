@@ -119,7 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableController
   collectableScore: 1
+  category: 2
   score: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!65 &8112630077216677615
 BoxCollider:
   m_ObjectHideFlags: 0

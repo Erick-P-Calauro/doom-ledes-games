@@ -43,7 +43,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        knockback();
+        Knockback();
         TryAttackPlayer();
         MoveEnemy();
         RotateEnemy();
@@ -113,7 +113,7 @@ public class EnemyController : MonoBehaviour
 
 
     //aplica o knockback
-    void knockback()
+    void Knockback()
     {
         if(knockbackTimer > 0)
         {
