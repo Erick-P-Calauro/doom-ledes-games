@@ -9,6 +9,8 @@ TagManager:
   - ScoreManager
   - SelectIndicator
   - PointText
+  - Collectable
+  - Medkit
   layers:
   - Default
   - TransparentFX

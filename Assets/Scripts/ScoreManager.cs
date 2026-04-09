@@ -16,7 +16,10 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] collectables = GameObject.FindGameObjectsWithTag("Collectable");
+
         scoreValues.Add("enemies", 0);
+        scoreValues.Add("collectables", 0);
         scoreValues.Add("total", 0);
 
         scoreTotal = 0f;
@@ -24,6 +27,11 @@ public class ScoreManager : MonoBehaviour
         foreach(GameObject e in enemies)
         {
             scoreTotal += e.GetComponent<EnemyController>().enemyPontuation * 100;
+        }
+
+        foreach(GameObject c in collectables)
+        {
+            scoreTotal += c.GetComponent<CollectableController>().collectableScore * 25;
         }
 
         scoreAvailable = scoreTotal;
@@ -46,6 +54,12 @@ public class ScoreManager : MonoBehaviour
         RefreshTotalScore(score);
     }
 
+    void RefreshCollectableScore(float score)
+    {
+        scoreValues["collectables"] += score;
+        RefreshTotalScore(score);
+    }
+
     public void comunicateEnemyDeath(GameObject enemy)
     {
         float enemyPontuation = enemy.GetComponent<EnemyController>().enemyPontuation * 100;
@@ -54,6 +68,16 @@ public class ScoreManager : MonoBehaviour
         shouldChangeHud = true;
 
         RefreshEnemyScore(enemyPontuation);
+    }
+
+    public void comunicateColletableCollected(GameObject collectable)
+    {
+        float collectablePontuation = collectable.GetComponent<CollectableController>().collectableScore * 25;
+
+        scoreAvailable -= collectablePontuation;
+        shouldChangeHud = true;
+
+        RefreshCollectableScore(collectablePontuation);
     }
 
     public int getPontuationPercentage()

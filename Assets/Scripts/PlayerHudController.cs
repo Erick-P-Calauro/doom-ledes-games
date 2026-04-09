@@ -40,10 +40,10 @@ public class PlayerHudController : MonoBehaviour
             repaintPoints();
         }
 
-        if(player.DamageTaken())
+        if(player.LifeChanged())
         {
             repaintLife();
-            player.ResetDamageTaken();
+            player.ResetLifeChange();
         }
     }
 

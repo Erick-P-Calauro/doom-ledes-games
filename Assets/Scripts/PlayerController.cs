@@ -21,11 +21,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 knockbackVelocity;
     [SerializeField] private AudioClip attackingSoundClip;
     [SerializeField] private AudioClip damageDealSoundClip;
+    [SerializeField] private AudioClip collectTrashSoundClip;
     // Campos sem SerializeField são estado interno do Player;
     private CharacterController charController;
     private Animator playerAnimator;
     private AudioSource attackingSound;
     private AudioSource damageDealSound;
+    private AudioSource collectTrashSound;
     private float playerX = 0f;
     private float playerY = 0f;
     private float playerZ = 0f;
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     private bool isDamaging = false;
     private bool damageTaken = false;
+    private bool healTaken = false;
     private bool damageDeal = false;
 
     void Start()
@@ -58,6 +61,10 @@ public class PlayerController : MonoBehaviour
         damageDealSound = gameObject.AddComponent<AudioSource>();
         damageDealSound.clip = damageDealSoundClip;
         damageDealSound.loop = false;
+
+        collectTrashSound = gameObject.AddComponent<AudioSource>();
+        collectTrashSound.clip = collectTrashSoundClip;
+        collectTrashSound.loop = false;
     }
 
     void Update()
@@ -146,7 +153,10 @@ public class PlayerController : MonoBehaviour
 
     void UpdateSoundEffects()
     {
-        if(isAttacking && !attackingSound.isPlaying)
+        AnimatorStateInfo state = playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+        // A utilização do animator state garante sincronicidade com a animação.
+        if(isAttacking && !attackingSound.isPlaying && state.IsName("Attack") && state.normalizedTime > 0f)
         {
             attackingSound.Play();
         }
@@ -207,8 +217,43 @@ public class PlayerController : MonoBehaviour
 
         playerAnimator.ResetTrigger("Attack");
         playerAnimator.SetTrigger("Attack");
+        
         isAttacking = true;
         isDamaging = true;
+    }
+
+    void CollectTrash(GameObject trash)
+    {
+        var c = trash.GetComponent<CollectableController>();
+        c.Collect();
+        collectTrashSound.Play();
+    }
+
+    void CollectMedkit(GameObject medkit)
+    {
+        if(playerLife != playerMaxLife) 
+        {
+            playerLife += 1;  
+        }
+
+        healTaken = true;
+        Destroy(medkit);
+        collectTrashSound.Play();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        GameObject otherObject = other.gameObject;
+
+        if(otherObject.CompareTag("Collectable"))
+        {
+            CollectTrash(otherObject);
+        }
+
+        if(otherObject.CompareTag("Medkit"))
+        {
+            CollectMedkit(otherObject);
+        }
     }
 
     float GetPlayerSpeed()
@@ -254,13 +299,14 @@ public class PlayerController : MonoBehaviour
         return playerMaxLife;    
     }
 
-    public bool DamageTaken()
+    public bool LifeChanged()
     {
-        return damageTaken;
+        return damageTaken || healTaken;
     }
 
-    public void ResetDamageTaken()
+    public void ResetLifeChange()
     {
         damageTaken = false;
+        healTaken = false;
     }
 }   
