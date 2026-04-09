@@ -237,11 +237,10 @@ public class PlayerController : MonoBehaviour
         if(playerLife != playerMaxLife) 
         {
             playerLife += 1;  
+            healTaken = true;
+            Destroy(medkit);
+            collectTrashSound.Play();
         }
-
-        healTaken = true;
-        Destroy(medkit);
-        collectTrashSound.Play();
     }
 
     void OnTriggerEnter(Collider other)
