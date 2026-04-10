@@ -204,13 +204,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14275e63a4542b24997ef5cab59dc462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  knockbackDuration: 0.3
+  deathDelay: 0.3
+  knockbackDuration: 1
   knockbackForce: 5
   enemyPontuation: 1
   attackRange: 1.4
   attackCooldown: 1
   enemyLife: 1
   detectionRadius: 10
-  idleAudioDelay: 1000
+  idleAudioDelay: 1500
   idleAudioClip: {fileID: 8300000, guid: 264a8405f9be03c4ab88b0b0e5f11c60, type: 3}
   damageTakenAudioClip: {fileID: 8300000, guid: c5ec9eb77353cde46af722472c7c8bf4, type: 3}

@@ -9,6 +9,8 @@ Este script é inserido no inimigo(enemy) e
 */
 public class EnemyController : MonoBehaviour
 {
+    //controla o delay para destruir um objeto após sua última vida 
+    public float deathDelay = 1.0f;
     //lidando com knockback 
     private Vector3 knockbackDirection;
     private float knockbackTimer = 0f;
@@ -61,7 +63,6 @@ public class EnemyController : MonoBehaviour
         damageTakenAudio.loop = false;
         damageTakenAudio.clip = damageTakenAudioClip;
     }
-
     void Update()
     {
         Knockback();
@@ -141,8 +142,8 @@ public class EnemyController : MonoBehaviour
         if(enemyLife == 0)
         {
             UpdateSoundEffects();
-            Destroy(gameObject);
             score.comunicateEnemyDeath(gameObject);
+            Destroy(gameObject, deathDelay);
         }
     }
 

@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "doom-ledes.slnx",
+    "dotnet.defaultSolution": "doom-ledes-games.slnx",
     "git.ignoreLimitWarning": true
 }
