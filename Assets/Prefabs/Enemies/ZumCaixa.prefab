@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14275e63a4542b24997ef5cab59dc462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  deathDelay: 0.5
+  deathDelay: 0.25
   knockbackDuration: 0.3
   knockbackForce: 5
   enemyPontuation: 1

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {   
@@ -41,6 +42,13 @@ public class PlayerController : MonoBehaviour
     private bool damageTaken = false;
     private bool healTaken = false;
     private bool damageDeal = false;
+    
+    //Variáveis do sistema de dash
+    private bool dashing = true;
+    private float dashingPower = 20f;
+    private float dashTime = 0.3f;
+    private float dashCooldown = 0.75f;
+
 
     void Start()
     {
@@ -310,5 +318,29 @@ public class PlayerController : MonoBehaviour
     {
         damageTaken = false;
         healTaken = false;
+    }
+
+
+    void OnDash()
+    {
+        if (dashing)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+    private IEnumerator Dash()
+    {
+        dashing = false;    
+        Vector3 dashDirection =(playerX * transform.right + playerZ * transform.forward).normalized;
+        float timer = 0f;
+        while (timer < dashTime)
+        {
+            charController.Move(dashDirection * dashingPower * Time.deltaTime);
+            timer += Time.deltaTime;
+            yield return null;
+            
+        }
+        yield return new WaitForSeconds(dashCooldown);
+        dashing = true;
     }
 }   

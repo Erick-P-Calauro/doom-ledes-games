@@ -143,6 +143,7 @@ public class EnemyController : MonoBehaviour
         {
             UpdateSoundEffects();
             score.comunicateEnemyDeath(gameObject);
+            //adicionado um delay para destruir o objeto "enemy"
             Destroy(gameObject, deathDelay);
         }
     }

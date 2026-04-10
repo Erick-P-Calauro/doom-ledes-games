@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   deathDelay: 0.5
-  knockbackDuration: 0.5
+  knockbackDuration: 0.2
   knockbackForce: 2
   enemyPontuation: 1
   attackRange: 2

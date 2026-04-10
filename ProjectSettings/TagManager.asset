@@ -12,9 +12,6 @@ TagManager:
   - Collectable
   - Medkit
   - InventoryManager
-  - Garrafantasma
-  - Zumcaixa
-  - O_Gororoba
   layers:
   - Default
   - TransparentFX
