@@ -3,7 +3,7 @@ using UnityEngine;
 public class VenenoCollider : MonoBehaviour
 {
     private float timer = 0f;
-    private float seconds = 2.0f;
+    private float seconds = 0.30f;
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
