@@ -656,7 +656,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 851924123940604647, guid: cf30c61fe79b53648903b670a18e9049, type: 3}
       propertyPath: m_Name
-      value: InvetoryManager
+      value: InventoryManager
       objectReference: {fileID: 0}
     - target: {fileID: 6270191789600392592, guid: cf30c61fe79b53648903b670a18e9049, type: 3}
       propertyPath: m_LocalPosition.x
