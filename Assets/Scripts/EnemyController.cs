@@ -106,7 +106,7 @@ public class EnemyController : MonoBehaviour
 
     void RotateEnemy()
     {    
-        transform.rotation = Quaternion.Euler(0, playerCamera.transform.eulerAngles.y, 5);   
+        transform.rotation = Quaternion.Euler(0, playerCamera.transform.eulerAngles.y, 0);   
     }
 
     void TryAttackPlayer()
