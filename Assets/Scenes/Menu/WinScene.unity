@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3cc51fa2c5fad4d987ff1545f35a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinSceneController
+  data: {fileID: 11400000, guid: bc6414b7a20a9c64098a7bfa676b78c8, type: 2}
   enemies_text: {fileID: 78611504}
   collectables_text: {fileID: 1865972996}
   total_text: {fileID: 351461571}

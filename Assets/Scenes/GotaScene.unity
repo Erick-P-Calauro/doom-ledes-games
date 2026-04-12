@@ -6662,6 +6662,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bandeirola
       objectReference: {fileID: 0}
+    - target: {fileID: 5251620014217444745, guid: e04832de9e8928343b13eb6a7d4013b9, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: bc6414b7a20a9c64098a7bfa676b78c8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

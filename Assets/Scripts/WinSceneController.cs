@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class WinSceneController : MonoBehaviour
 {
+    public PlayerScoreData data;
+
     [SerializeField] private TextMeshProUGUI enemies_text;
     [SerializeField] private TextMeshProUGUI collectables_text;
     [SerializeField] private TextMeshProUGUI total_text;
@@ -12,14 +14,10 @@ public class WinSceneController : MonoBehaviour
     void Start()
     {     
         try
-        {
-            var score_data = AssetDatabase.LoadAssetAtPath<PlayerScoreData>("Assets/score_data.asset");
-            
-            enemies_text.text = "Inimigos Derrotados : +" + score_data.enemiesScore + " Pontos.";
-            collectables_text.text = "Lixo Coletado : +" + score_data.collectablesScore + " Pontos.";
-            total_text.text = "Total : +" + score_data.totalScore + " Pontos.";
-
-            AssetDatabase.DeleteAsset("Assets/score_data.asset");
+        {            
+            enemies_text.text = "Inimigos Derrotados : +" + data.enemiesScore + " Pontos.";
+            collectables_text.text = "Lixo Coletado : +" + data.collectablesScore + " Pontos.";
+            total_text.text = "Total : +" + data.totalScore + " Pontos.";
             
         }catch(Exception e)
         {

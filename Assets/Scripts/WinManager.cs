@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class WinController : MonoBehaviour
 {
+    public PlayerScoreData data;
     private GameObject player;
     private ScoreManager score;
 
@@ -30,13 +31,10 @@ public class WinController : MonoBehaviour
     void CreateAndSaveScoreAsset()
     {
         var score_values = score.getScoreValues();
-        PlayerScoreData data =  ScriptableObject.CreateInstance<PlayerScoreData>();
         
         data.enemiesScore = score_values["enemies"];
         data.collectablesScore = score_values["collectables"];
         data.totalScore = score_values["total"];
-        
-        UnityEditor.AssetDatabase.CreateAsset(data, "Assets/score_data.asset");
     }
 
 }
