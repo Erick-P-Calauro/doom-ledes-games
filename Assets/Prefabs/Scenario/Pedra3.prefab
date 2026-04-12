@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6953108180242775590}
   - component: {fileID: 4376532156811338104}
-  - component: {fileID: 521408996714755602}
+  - component: {fileID: 8604254262761547571}
   m_Layer: 0
   m_Name: Pedra3
   m_TagString: Untagged
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &521408996714755602
+--- !u!114 &8604254262761547571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +101,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1897367822564776988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c0047dce2428e4b8c3297e76983399, type: 3}
+  m_Script: {fileID: 11500000, guid: 48e926777efb00f4ba5c52607c1e3735, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  sensitivity: 0.25
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
