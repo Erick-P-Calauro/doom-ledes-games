@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using System.Collections;
-using System.Runtime.CompilerServices;
+
 
 public class MovingPlat : MonoBehaviour
 {
@@ -15,12 +15,26 @@ public class MovingPlat : MonoBehaviour
 
     //Manter o player encima da plataforma
     [SerializeField] Transform platformTransform;
+    private Transform playerTransform;
+    private Vector3 lastPlatformPosition;
     
     void Start()
     {
         Platform.transform.position = PointA.transform.position;
         targetPosition = PointB.transform.position;
+        lastPlatformPosition = Platform.transform.position;
         StartCoroutine(MovePlatform());
+    }
+
+
+    void Update()
+    {
+        if(playerTransform != null)
+        {
+            Vector3 delta = Platform.transform.position - lastPlatformPosition;
+            playerTransform.position += delta*2.5f;
+        }
+        lastPlatformPosition = Platform.transform.position;
     }
     IEnumerator MovePlatform()
     {
@@ -40,14 +54,14 @@ public class MovingPlat : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.transform.SetParent(platformTransform);
+            playerTransform = other.transform;
         }
     }
         private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            other.transform.SetParent(null);
+            playerTransform = null;
         }
     }
 }

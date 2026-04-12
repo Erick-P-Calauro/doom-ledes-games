@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private bool dashing = true;
     private float dashingPower = 20f;
     private float dashTime = 0.3f;
-    private float dashCooldown = 0.75f;
+    private float dashCooldown = 0.45f;
 
 
     void Start()
@@ -285,6 +285,7 @@ public class PlayerController : MonoBehaviour
             Die();
         }
 
+        //Calcula o vetor direção e o normaliza(1), aplica o knockback
         Vector3 direction = (transform.position - attackerPosition).normalized;
         knockbackVelocity = direction * knockbackForce;
 

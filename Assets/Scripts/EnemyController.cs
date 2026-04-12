@@ -134,7 +134,7 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("WasHit");
         damageTaken = true;
 
-        //Calcula direção e duração do knockback
+        //Calcula direção e inicia o knockbackTimer
         knockbackDirection = (transform.position - player.position).normalized;
         knockbackTimer = knockbackDuration;
         knockbackDirection.y = 0f;
@@ -153,17 +153,17 @@ public class EnemyController : MonoBehaviour
         return enemyLife;
     }
 
-    //aplica o knockback
-    void Knockback()
+    void Knockback() //aplica o knockback
     {
         if(knockbackTimer > 0)
         {
-            agent.enabled = false;
-            transform.Translate(knockbackDirection * knockbackForce * Time.deltaTime, Space.World);
-            knockbackTimer -= Time.deltaTime;
+            agent.enabled = false;  //Desativa i agent para não gerar conflito
+            transform.Translate(knockbackDirection * knockbackForce * Time.deltaTime, Space.World); //Aplica o knockback em relação (Space.World)
+            knockbackTimer -= Time.deltaTime; //Reduz o timer até knockbackTimer <= 0
         }
         else
         {
+            //ativa o agent novamente
             agent.enabled = true;
         }
     }
