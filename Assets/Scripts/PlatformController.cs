@@ -1,40 +1,67 @@
-using System;
+
 using UnityEngine;
+using System.Collections;
+
+
 public class PlatformController : MonoBehaviour
 {
-    [SerializeField] private float distance = 30f;
-    [SerializeField] private float timeMoving = 5f; // Seconds
-    [SerializeField] private float restartMoveDelay = 2f; // Seconds
-    private bool isMoving = false;
-    private bool isMovingForward = true;
-    private DateTime lastStartMove = DateTime.Now;
-    private DateTime lastEndMove = DateTime.Now;
+    //Mover plataforma
+    [SerializeField] GameObject PointA;
+    [SerializeField] GameObject PointB;
+    [SerializeField] float speed = 10f;
+    [SerializeField] float delay = 1f;
+    [SerializeField] GameObject Platform;
+    private Vector3 targetPosition;
+
+    //Manter o player encima da plataforma
+    [SerializeField] Transform platformTransform;
+    private Transform playerTransform;
+    private Vector3 lastPlatformPosition;
+    
+    void Start()
+    {
+        Platform.transform.position = PointA.transform.position;
+        targetPosition = PointB.transform.position;
+        lastPlatformPosition = Platform.transform.position;
+        StartCoroutine(MovePlatform());
+    }
+
 
     void Update()
     {
-        if(isMoving)
+        if(playerTransform != null)
         {
-            if(DateTime.Now.Subtract(lastStartMove).Seconds <= timeMoving)
+            Vector3 delta = Platform.transform.position - lastPlatformPosition;
+            playerTransform.position += delta*2.5f;
+        }
+        lastPlatformPosition = Platform.transform.position;
+    }
+    IEnumerator MovePlatform()
+    {
+        while (true)
+        {
+            while((targetPosition - Platform.transform.position).sqrMagnitude > 0.01f)
             {
-                if(isMovingForward)
-                {
-                    transform.position += Time.deltaTime * (distance/timeMoving) * Vector3.right ;
-                }else
-                {
-                    transform.position += Time.deltaTime  * -(distance/timeMoving) * Vector3.right;
-                }
-
-            }else
-            {
-                lastEndMove = DateTime.Now;
-                isMovingForward = !isMovingForward;
-                isMoving = false;
+                Platform.transform.position = Vector3.MoveTowards(Platform.transform.position, targetPosition, speed * Time.deltaTime);
+                yield return null;
             }
-
-        }else if (DateTime.Now.Subtract(lastEndMove).Seconds > restartMoveDelay)
+            targetPosition = targetPosition == PointA.transform.position
+                ? PointB.transform.position : PointA.transform.position;
+                yield return new WaitForSeconds(delay);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            isMoving = true;
-            lastStartMove = DateTime.Now;
+            playerTransform = other.transform;
+        }
+    }
+        private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerTransform = null;
         }
     }
 }
